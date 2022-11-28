@@ -20,7 +20,7 @@ namespace TaskPlannerPIU
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            TaskPlannerWindow taskPlannerWindow = new TaskPlannerWindow();
+            TaskPlannerWindow taskPlannerWindow = new TaskPlannerWindow(this);
             taskPlannerWindow.Show();
             this.Hide();
         }
@@ -28,6 +28,11 @@ namespace TaskPlannerPIU
         private void textBoxUsername_TextChanged(object sender, EventArgs e)
         {
             _username = textBoxUsername.Text;
+        }
+
+        public string getUsername()
+        {
+            return _username;
         }
     }
 }

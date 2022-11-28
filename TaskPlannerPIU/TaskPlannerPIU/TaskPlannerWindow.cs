@@ -12,6 +12,13 @@ namespace TaskPlannerPIU
 {
     public partial class TaskPlannerWindow : Form
     {
+        private MainWindow _mainWindow;
+
+        public TaskPlannerWindow(MainWindow other)
+        {
+            _mainWindow = other;
+            InitializeComponent();
+        }
         public TaskPlannerWindow()
         {
             InitializeComponent();
@@ -20,7 +27,8 @@ namespace TaskPlannerPIU
 
         private void TaskPlannerWindow_Load(object sender, EventArgs e)
         {
-            this.labelWelcome.Text += "Piu, Piu";
+            string username = _mainWindow.getUsername();
+            this.labelWelcome.Text += username;
         }
 
         private void labelWelcome_Click(object sender, EventArgs e)
