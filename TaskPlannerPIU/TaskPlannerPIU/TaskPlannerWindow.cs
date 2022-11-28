@@ -132,7 +132,10 @@ namespace TaskPlannerPIU
             _currentTitle = titleTextBox.Text;
         }
 
-        private void groupBoxTasks_Enter(object sender, EventArgs e)
+        private void initialListGroupBox_Enter(object sender, EventArgs e)
+        {
+        }
+            private void groupBoxTasks_Enter(object sender, EventArgs e)
         {
 
         }
