@@ -27,11 +27,13 @@ namespace TaskPlannerPIU
         {
             InitializeComponent();
             _parent = parent;
+            this.AutoScroll = true;
         }
 
         private void TaskPlannerWindow_Load(object sender, EventArgs e)
         {
             this.labelWelcome.Text += _parent.Username + "!";
+
         }
 
         private void btnAddList_Click(object sender, EventArgs e)
@@ -43,6 +45,7 @@ namespace TaskPlannerPIU
             _currentTitle = titleTextBox.Text;
             titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             _currentListTextBox = titleTextBox;
+            labelWelcome.Location = new Point(3, 8);
 
 
             Button addListButton = new Button();
@@ -85,6 +88,21 @@ namespace TaskPlannerPIU
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
             _currentTitle = titleTextBox.Text;
+        }
+
+        private void groupBoxTasks_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TaskPlannerWindow_Paint(object sender, PaintEventArgs e)
+        {
+           // labelWelcome.Location = new Point(-this.AutoScrollPosition.X, this.Location.Y);
+        }
+
+        private void TaskPlannerWindow_Scroll(object sender, ScrollEventArgs e)
+        {
+            labelWelcome.Location = new Point(3,8);
         }
     }
 }
