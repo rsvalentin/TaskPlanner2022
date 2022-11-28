@@ -40,6 +40,7 @@
             this.labelWelcome.Size = new System.Drawing.Size(105, 25);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
+            this.labelWelcome.Click += new System.EventHandler(this.labelWelcome_Click);
             // 
             // TaskPlannerWindow
             // 

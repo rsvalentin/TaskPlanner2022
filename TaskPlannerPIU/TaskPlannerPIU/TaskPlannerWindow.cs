@@ -23,6 +23,9 @@ namespace TaskPlannerPIU
             this.labelWelcome.Text += "Piu, Piu";
         }
 
+        private void labelWelcome_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
