@@ -31,6 +31,7 @@
             this.labelWelcome = new System.Windows.Forms.Label();
             this.btnAddList = new System.Windows.Forms.Button();
             this.groupBoxTasks = new System.Windows.Forms.GroupBox();
+            this.initialListGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBoxTasks.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,11 +60,21 @@
             // groupBoxTasks
             // 
             this.groupBoxTasks.Controls.Add(this.btnAddList);
+            this.groupBoxTasks.Controls.Add(this.initialListGroupBox);
             this.groupBoxTasks.Location = new System.Drawing.Point(28, 74);
             this.groupBoxTasks.Name = "groupBoxTasks";
             this.groupBoxTasks.Size = new System.Drawing.Size(922, 448);
             this.groupBoxTasks.TabIndex = 2;
             this.groupBoxTasks.TabStop = false;
+            // 
+            // initialListGroupBox
+            // 
+            this.initialListGroupBox.Location = new System.Drawing.Point(5, 20);
+            this.initialListGroupBox.Name = "initialListGroupBox";
+            this.initialListGroupBox.Size = new System.Drawing.Size(150, 230);
+            this.initialListGroupBox.TabIndex = 2;
+            this.initialListGroupBox.TabStop = false;
+            this.initialListGroupBox.Enter += new System.EventHandler(this.initialListGroupBox_Enter);
             // 
             // TaskPlannerWindow
             // 
@@ -87,5 +98,6 @@
         private System.Windows.Forms.Label labelWelcome;
         private System.Windows.Forms.Button btnAddList;
         private System.Windows.Forms.GroupBox groupBoxTasks;
+        private System.Windows.Forms.GroupBox initialListGroupBox;
     }
 }
