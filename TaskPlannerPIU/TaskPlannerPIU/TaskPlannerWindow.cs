@@ -14,6 +14,8 @@ namespace TaskPlannerPIU
     {
         private MainWindow _parent;
         private TextBox _currentListTextBox;
+        private Button addListButton;
+        Button quitAddingListButton;
         private string _currentTitle;
         private TextBox titleTextBox;
         private int _counterLists = 1;
@@ -48,7 +50,7 @@ namespace TaskPlannerPIU
             labelWelcome.Location = new Point(3, 8);
 
 
-            Button addListButton = new Button();
+            addListButton = new Button();
             addListButton.Location = _counterLists == 1 ? new Point(addListPositionX, 70) : new Point(addListPositionX + moveX, 70);
             addListPositionX = addListButton.Location.X;
             addListButton.Text = "Add list";
@@ -57,7 +59,7 @@ namespace TaskPlannerPIU
             addListButton.Name = "btnAddAndSaveList";
             addListButton.Click += new System.EventHandler(this.btnAddAndSaveList_Click);
 
-            Button quitAddingListButton = new Button();
+            quitAddingListButton = new Button();
             quitAddingListButton.Location = _counterLists == 1 ? new Point(quitAddingListPositionX, 70) : new Point(quitAddingListPositionX + moveX, 70);
             quitAddingListButton.Text = "Quit";
             quitAddingListPositionX = quitAddingListButton.Location.X;
@@ -65,7 +67,10 @@ namespace TaskPlannerPIU
             quitAddingListButton.Font = new Font("Microsoft Sans Serif", 7);
             quitAddingListButton.Name = "btnQuitAddingList";
             quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click);
-
+            if (this.groupBoxTasks.Controls.Contains(addListButton))
+            {
+                return;
+            }
             this.groupBoxTasks.Controls.Add(titleTextBox);
             this.groupBoxTasks.Controls.Add(addListButton);
             this.groupBoxTasks.Controls.Add(quitAddingListButton);
@@ -74,6 +79,15 @@ namespace TaskPlannerPIU
 
         private void btnAddAndSaveList_Click(object sender, EventArgs e)
         {
+            this.addListButton.Hide();
+            this.quitAddingListButton.Hide();
+            Button createCardBtn = new Button();
+            createCardBtn.Text = "Add card";
+            createCardBtn.Location = _counterLists == 1 ? new Point(addListPositionX, 70) : new Point(addListPositionX, 70);
+            createCardBtn.Width = 70;
+            createCardBtn.Font = new Font("Microsoft Sans Serif", 7);
+            //createCardBtn.Show();
+            this.groupBoxTasks.Controls.Add(createCardBtn);
             _currentListTextBox.Text = _currentTitle;
             this.btnAddList.Location = new Point(titlePositionX + moveX, 50);
             this.btnAddList.Show();
@@ -97,12 +111,12 @@ namespace TaskPlannerPIU
 
         private void TaskPlannerWindow_Paint(object sender, PaintEventArgs e)
         {
-           // labelWelcome.Location = new Point(-this.AutoScrollPosition.X, this.Location.Y);
+            // labelWelcome.Location = new Point(-this.AutoScrollPosition.X, this.Location.Y);
         }
 
         private void TaskPlannerWindow_Scroll(object sender, ScrollEventArgs e)
         {
-            labelWelcome.Location = new Point(3,8);
+            labelWelcome.Location = new Point(3, 8);
         }
     }
 }
