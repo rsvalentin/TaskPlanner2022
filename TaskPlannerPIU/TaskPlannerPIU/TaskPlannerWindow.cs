@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -20,6 +22,7 @@ namespace TaskPlannerPIU
         private TextBox cardMessageTextBox;
         private Button saveCardButton;
         private Button quitSavingCardButton;
+        private String listTitle;
 
         public TaskPlannerWindow(MainWindow parent)
         {
@@ -75,6 +78,12 @@ namespace TaskPlannerPIU
 
         private void addListButton_Click(object sender, EventArgs e)
         {
+            listTitle = titleTextBox.Text;
+            SqlConnection cnn = getConnection();
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("insert into dbo.List(title) values('" + listTitle + "')", cnn);
+            cmd.ExecuteNonQuery();
+            cnn.Close();
             createAddCardButton();
 
             this.saveListButton.Hide();
@@ -171,6 +180,17 @@ namespace TaskPlannerPIU
 
         private void saveCardButton_Click(object sender, EventArgs e)
         {
+            String msg = cardMessageTextBox.Text;
+            SqlConnection cnn = getConnection();
+            cnn.Open();
+            SqlCommand cmd1 = new SqlCommand("select list_id from dbo.List where title = '" + listTitle + "'", cnn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd1);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            int listId = Int32.Parse(dt.Rows[0][0].ToString());
+            SqlCommand cmd2 = new SqlCommand("insert into dbo.Card(card_msg, list_id) values('" + msg +"','" + listId + "')", cnn);
+            cmd2.ExecuteNonQuery();
+            cnn.Close();
             this.saveCardButton.Hide();
             this.quitSavingCardButton.Hide();
             this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y) : new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y + MOVE_TASK_Y);
@@ -182,6 +202,11 @@ namespace TaskPlannerPIU
         private void quitSavingCardButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private SqlConnection getConnection()
+        {
+            return new SqlConnection("Data Source = (localdb)\\ProjectModels;AttachDbFilename = C:\\Users\\vali\\AppData\\Local\\Microsoft\\VisualStudio\\SSDT\\PIU.mdf; Integrated Security = True");
         }
 
     }
