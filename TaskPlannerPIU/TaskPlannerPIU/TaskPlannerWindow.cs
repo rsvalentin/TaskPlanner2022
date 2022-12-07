@@ -13,10 +13,13 @@ namespace TaskPlannerPIU
         private MainWindow _parent;
         private TextBox _currentListTextBox;
         private string _selectedColumnName;
+        private string _selectedTaskContent;
         private GroupBox _listGroupBox;
         private Button _createCardBtn;
         private Dictionary<Button, int> cardButtonIndexList = new Dictionary<Button, int>();
-
+        private TextBox cardMessageTextBox;
+        private Button saveCardButton;
+        private Button quitSavingCardButton;
 
         public TaskPlannerWindow(MainWindow parent)
         {
@@ -84,7 +87,6 @@ namespace TaskPlannerPIU
 
             setColumnTitle();
             createNewGroupBoxForColumn();
-            
         }
 
         private void quitAddingListButton_Click_1(object sender, EventArgs e)
@@ -133,34 +135,51 @@ namespace TaskPlannerPIU
         {
             var index = cardButtonIndexList[_createCardBtn];
             var selectedGroupBox = _groupBoxesLists[index];
-            var xLocation = 11; 
-            var yLocation = selectedGroupBox.Location.Y; 
+            var xLocation = 11;
 
             _createCardBtn.Hide();
-            TextBox cardMessageTextBox = new TextBox();
+            cardMessageTextBox = new TextBox();
             cardMessageTextBox.Width = this.titleTextBox.Width;
             cardMessageTextBox.Height = 30;
             cardMessageTextBox.Multiline = true;
             selectedGroupBox.Controls.Add(cardMessageTextBox);
-            cardMessageTextBox.Location = new Point(xLocation, yLocation + 25);
+            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, CARD_LOCATION_Y) : new Point(xLocation, CARD_LOCATION_Y + MOVE_TASK_Y);
+            CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
             cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
 
-            Button saveCardButton = new Button();
+            saveCardButton = new Button();
             selectedGroupBox.Controls.Add(saveCardButton);
             saveCardButton.Text = "Save";
-            saveCardButton.Location = new Point(xLocation, yLocation + 55);
+            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             saveCardButton.Width = this.saveListButton.Width;
-            saveCardButton.Click += new System.EventHandler(this.addCardButton_Click);
+            saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
 
-            Button quitSavingCardButton = new Button();
+            quitSavingCardButton = new Button();
             selectedGroupBox.Controls.Add(quitSavingCardButton);
             quitSavingCardButton.Text = "Quit";
-            quitSavingCardButton.Location = new Point(xLocation + 52, yLocation + 55);
+            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             quitSavingCardButton.Width = this.saveListButton.Width;
-            quitSavingCardButton.Click += new System.EventHandler(this.addCardButton_Click);
+            quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
+
+            QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
         }
 
         private void cardMessageTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveCardButton_Click(object sender, EventArgs e)
+        {
+            this.saveCardButton.Hide();
+            this.quitSavingCardButton.Hide();
+            this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y) : new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y + MOVE_TASK_Y);
+            CREATE_CARD_LOCATION_Y = this._createCardBtn.Location.Y;
+            this._createCardBtn.Show();
+            COUNTER_TASKS++;
+        }
+
+        private void quitSavingCardButton_Click(object sender, EventArgs e)
         {
 
         }

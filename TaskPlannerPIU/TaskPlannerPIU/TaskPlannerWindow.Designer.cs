@@ -32,9 +32,9 @@
             this.btnAddList = new System.Windows.Forms.Button();
             this.groupBoxTasks = new System.Windows.Forms.GroupBox();
             this.initialListGroupBox = new System.Windows.Forms.GroupBox();
+            this.quitAddingListButton = new System.Windows.Forms.Button();
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.saveListButton = new System.Windows.Forms.Button();
-            this.quitAddingListButton = new System.Windows.Forms.Button();
             this.groupBoxTasks.SuspendLayout();
             this.initialListGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -82,9 +82,19 @@
             this.initialListGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.initialListGroupBox.Name = "initialListGroupBox";
             this.initialListGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.initialListGroupBox.Size = new System.Drawing.Size(146, 184);
+            this.initialListGroupBox.Size = new System.Drawing.Size(146, 404);
             this.initialListGroupBox.TabIndex = 2;
             this.initialListGroupBox.TabStop = false;
+            // 
+            // quitAddingListButton
+            // 
+            this.quitAddingListButton.Location = new System.Drawing.Point(78, 40);
+            this.quitAddingListButton.Name = "quitAddingListButton";
+            this.quitAddingListButton.Size = new System.Drawing.Size(58, 23);
+            this.quitAddingListButton.TabIndex = 4;
+            this.quitAddingListButton.Text = "Quit";
+            this.quitAddingListButton.UseVisualStyleBackColor = true;
+            this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click_1);
             // 
             // titleTextBox
             // 
@@ -102,16 +112,6 @@
             this.saveListButton.Text = "Save";
             this.saveListButton.UseVisualStyleBackColor = true;
             this.saveListButton.Click += new System.EventHandler(this.addListButton_Click);
-            // 
-            // quitAddingListButton
-            // 
-            this.quitAddingListButton.Location = new System.Drawing.Point(78, 40);
-            this.quitAddingListButton.Name = "quitAddingListButton";
-            this.quitAddingListButton.Size = new System.Drawing.Size(58, 23);
-            this.quitAddingListButton.TabIndex = 4;
-            this.quitAddingListButton.Text = "Quit";
-            this.quitAddingListButton.UseVisualStyleBackColor = true;
-            this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click_1);
             // 
             // TaskPlannerWindow
             // 
