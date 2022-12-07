@@ -1,98 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static TaskPlannerPIU.Helpers.Constants;
 
 namespace TaskPlannerPIU
 {
     public partial class TaskPlannerWindow : Form
     {
+        private List<GroupBox> _groupBoxesLists = new List<GroupBox>();
         private MainWindow _parent;
         private TextBox _currentListTextBox;
-        private Button addListButton;
-        Button quitAddingListButton;
-        private string _currentTitle;
-        private TextBox titleTextBox;
-        private int _counterLists = 1;
-
-        private int addListPositionX = 40;
-        private int quitAddingListPositionX = 90;
-        private int titlePositionX = 40;
-        private int moveX = 120;
+        private string _selectedColumnName;
+        private Button addCardButton;
+        private GroupBox _listGroupBox;
 
         public TaskPlannerWindow(MainWindow parent)
         {
             InitializeComponent();
             _parent = parent;
             this.AutoScroll = true;
+            this.saveListButton.Hide();
+            this.quitAddingListButton.Hide();
+            this.titleTextBox.Hide();
         }
 
         private void TaskPlannerWindow_Load(object sender, EventArgs e)
         {
             this.labelWelcome.Text += _parent.Username + "!";
-
+            _groupBoxesLists.Add(this.initialListGroupBox);
         }
 
         private void btnAddList_Click(object sender, EventArgs e)
         {
             this.btnAddList.Hide();
-            titleTextBox = new TextBox();
-            titleTextBox.Location = _counterLists == 1 ? new Point(titlePositionX, 50) : new Point(titlePositionX + moveX, 50);
-            titlePositionX = titleTextBox.Location.X;
-            _currentTitle = titleTextBox.Text;
+            this.saveListButton.Show();
+            this.quitAddingListButton.Show();
+            this.titleTextBox.Show();
+
+            if (COUNTER_LISTS == 1)
+            {
+                _listGroupBox = initialListGroupBox;
+                this.groupBoxTasks.Controls.Add(_listGroupBox);
+            }
+            _listGroupBox.Controls.Add(titleTextBox);
+            _listGroupBox.Controls.Add(saveListButton);
+            _listGroupBox.Controls.Add(quitAddingListButton);
+            _selectedColumnName = titleTextBox.Text;
             titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             _currentListTextBox = titleTextBox;
-            labelWelcome.Location = new Point(3, 8);
-
-
-            addListButton = new Button();
-            addListButton.Location = _counterLists == 1 ? new Point(addListPositionX, 70) : new Point(addListPositionX + moveX, 70);
-            addListPositionX = addListButton.Location.X;
-            addListButton.Text = "Add list";
-            addListButton.Width = 50;
-            addListButton.Font = new Font("Microsoft Sans Serif", 7);
-            addListButton.Name = "btnAddAndSaveList";
-            addListButton.Click += new System.EventHandler(this.btnAddAndSaveList_Click);
-
-            quitAddingListButton = new Button();
-            quitAddingListButton.Location = _counterLists == 1 ? new Point(quitAddingListPositionX, 70) : new Point(quitAddingListPositionX + moveX, 70);
-            quitAddingListButton.Text = "Quit";
-            quitAddingListPositionX = quitAddingListButton.Location.X;
-            quitAddingListButton.Width = 50;
-            quitAddingListButton.Font = new Font("Microsoft Sans Serif", 7);
-            quitAddingListButton.Name = "btnQuitAddingList";
-            quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click);
-            if (this.groupBoxTasks.Controls.Contains(addListButton))
-            {
-                return;
-            }
-            this.groupBoxTasks.Controls.Add(titleTextBox);
-            this.groupBoxTasks.Controls.Add(addListButton);
-            this.groupBoxTasks.Controls.Add(quitAddingListButton);
-
         }
 
-        private void btnAddAndSaveList_Click(object sender, EventArgs e)
-        {
-            this.addListButton.Hide();
-            this.quitAddingListButton.Hide();
-            Button createCardBtn = new Button();
-            createCardBtn.Text = "Add card";
-            createCardBtn.Location = _counterLists == 1 ? new Point(addListPositionX, 70) : new Point(addListPositionX, 70);
-            createCardBtn.Width = 70;
-            createCardBtn.Font = new Font("Microsoft Sans Serif", 7);
-            //createCardBtn.Show();
-            this.groupBoxTasks.Controls.Add(createCardBtn);
-            _currentListTextBox.Text = _currentTitle;
-            this.btnAddList.Location = new Point(titlePositionX + moveX, 50);
-            this.btnAddList.Show();
-            _counterLists++;
-        }
 
         private void quitAddingListButton_Click(object sender, EventArgs e)
         {
@@ -101,22 +59,69 @@ namespace TaskPlannerPIU
 
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
-            _currentTitle = titleTextBox.Text;
-        }
-
-        private void groupBoxTasks_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TaskPlannerWindow_Paint(object sender, PaintEventArgs e)
-        {
-            // labelWelcome.Location = new Point(-this.AutoScrollPosition.X, this.Location.Y);
+            _selectedColumnName = titleTextBox.Text;
         }
 
         private void TaskPlannerWindow_Scroll(object sender, ScrollEventArgs e)
         {
             labelWelcome.Location = new Point(3, 8);
+        }
+
+        private void addListButton_Click(object sender, EventArgs e)
+        {
+            createAddCardButton();
+
+            this.saveListButton.Hide();
+            this.quitAddingListButton.Hide();
+            this.titleTextBox.Hide();
+
+            COUNTER_LISTS++;
+            _currentListTextBox.Text = _selectedColumnName;
+            this.btnAddList.Show();
+
+            setColumnTitle();
+            createNewGroupBoxForColumn();
+            
+        }
+
+        private void quitAddingListButton_Click_1(object sender, EventArgs e)
+        {
+            _currentListTextBox.Text = "";
+        }
+
+        private void setColumnTitle()
+        {
+            var textbox = new TextBox();
+            textbox.Location = this.titleTextBox.Location;
+            textbox.Width = this.titleTextBox.Width;
+            textbox.ReadOnly = true;
+            textbox.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+            textbox.BorderStyle = BorderStyle.FixedSingle;
+            textbox.Text = this.titleTextBox.Text;
+            this._listGroupBox.Controls.Add(textbox);
+            this.titleTextBox.Text = "";
+        }
+
+        private void createNewGroupBoxForColumn()
+        {
+            this._listGroupBox = new GroupBox();
+            this._groupBoxesLists.Add(_listGroupBox);
+            this._listGroupBox.Location = new Point(LIST_GROUPBOX_POSITION_X + MOVE_GROUPBOX_X, this.initialListGroupBox.Location.Y);
+            LIST_GROUPBOX_POSITION_X = _listGroupBox.Location.X;
+            this._listGroupBox.Width = initialListGroupBox.Width;
+            this._listGroupBox.Height = initialListGroupBox.Height; // TODO: dynamic dupa nr de task uri din lista
+            this._listGroupBox.Controls.Add(btnAddList);
+            this.groupBoxTasks.Controls.Add(_listGroupBox);
+        }
+
+        private void createAddCardButton()
+        {
+            Button createCardBtn = new Button();
+            createCardBtn.Text = "Add card";
+            this._listGroupBox.Controls.Add(createCardBtn);
+            createCardBtn.Location = new Point(this.saveListButton.Location.X, this.saveListButton.Location.Y + 5);
+            createCardBtn.Width = 70;
+            createCardBtn.Font = new Font("Microsoft Sans Serif", 7);
         }
     }
 }
