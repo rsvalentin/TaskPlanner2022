@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using static TaskPlannerPIU.Helpers.Constants;
 
@@ -12,8 +13,10 @@ namespace TaskPlannerPIU
         private MainWindow _parent;
         private TextBox _currentListTextBox;
         private string _selectedColumnName;
-        private Button addCardButton;
         private GroupBox _listGroupBox;
+        private Button _createCardBtn;
+        private Dictionary<Button, int> cardButtonIndexList = new Dictionary<Button, int>();
+
 
         public TaskPlannerWindow(MainWindow parent)
         {
@@ -116,12 +119,51 @@ namespace TaskPlannerPIU
 
         private void createAddCardButton()
         {
-            Button createCardBtn = new Button();
-            createCardBtn.Text = "Add card";
-            this._listGroupBox.Controls.Add(createCardBtn);
-            createCardBtn.Location = new Point(this.saveListButton.Location.X, this.saveListButton.Location.Y + 5);
-            createCardBtn.Width = 70;
-            createCardBtn.Font = new Font("Microsoft Sans Serif", 7);
+            _createCardBtn = new Button();
+            _createCardBtn.Text = "Add card";
+            this._listGroupBox.Controls.Add(_createCardBtn);
+            _createCardBtn.Location = new Point(this.saveListButton.Location.X, this.saveListButton.Location.Y + 5);
+            _createCardBtn.Width = 70;
+            _createCardBtn.Click += new System.EventHandler(this.addCardButton_Click);
+
+            cardButtonIndexList.Add(_createCardBtn, COUNTER_LISTS - 1 );
         }
+
+        private void addCardButton_Click(object sender, EventArgs e)
+        {
+            var index = cardButtonIndexList[_createCardBtn];
+            var selectedGroupBox = _groupBoxesLists[index];
+            var xLocation = 11; 
+            var yLocation = selectedGroupBox.Location.Y; 
+
+            _createCardBtn.Hide();
+            TextBox cardMessageTextBox = new TextBox();
+            cardMessageTextBox.Width = this.titleTextBox.Width;
+            cardMessageTextBox.Height = 30;
+            cardMessageTextBox.Multiline = true;
+            selectedGroupBox.Controls.Add(cardMessageTextBox);
+            cardMessageTextBox.Location = new Point(xLocation, yLocation + 25);
+            cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
+
+            Button saveCardButton = new Button();
+            selectedGroupBox.Controls.Add(saveCardButton);
+            saveCardButton.Text = "Save";
+            saveCardButton.Location = new Point(xLocation, yLocation + 55);
+            saveCardButton.Width = this.saveListButton.Width;
+            saveCardButton.Click += new System.EventHandler(this.addCardButton_Click);
+
+            Button quitSavingCardButton = new Button();
+            selectedGroupBox.Controls.Add(quitSavingCardButton);
+            quitSavingCardButton.Text = "Quit";
+            quitSavingCardButton.Location = new Point(xLocation + 52, yLocation + 55);
+            quitSavingCardButton.Width = this.saveListButton.Width;
+            quitSavingCardButton.Click += new System.EventHandler(this.addCardButton_Click);
+        }
+
+        private void cardMessageTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
