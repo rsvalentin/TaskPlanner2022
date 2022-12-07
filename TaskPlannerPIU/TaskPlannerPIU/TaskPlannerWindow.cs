@@ -69,6 +69,8 @@ namespace TaskPlannerPIU
 
         private void addListButton_Click(object sender, EventArgs e)
         {
+            createAddCardButton();
+
             this.saveListButton.Hide();
             this.quitAddingListButton.Hide();
             this.titleTextBox.Hide();
@@ -79,6 +81,7 @@ namespace TaskPlannerPIU
 
             setColumnTitle();
             createNewGroupBoxForColumn();
+            
         }
 
         private void quitAddingListButton_Click_1(object sender, EventArgs e)
@@ -109,6 +112,16 @@ namespace TaskPlannerPIU
             this._listGroupBox.Height = initialListGroupBox.Height; // TODO: dynamic dupa nr de task uri din lista
             this._listGroupBox.Controls.Add(btnAddList);
             this.groupBoxTasks.Controls.Add(_listGroupBox);
+        }
+
+        private void createAddCardButton()
+        {
+            Button createCardBtn = new Button();
+            createCardBtn.Text = "Add card";
+            this._listGroupBox.Controls.Add(createCardBtn);
+            createCardBtn.Location = new Point(this.saveListButton.Location.X, this.saveListButton.Location.Y + 5);
+            createCardBtn.Width = 70;
+            createCardBtn.Font = new Font("Microsoft Sans Serif", 7);
         }
     }
 }
