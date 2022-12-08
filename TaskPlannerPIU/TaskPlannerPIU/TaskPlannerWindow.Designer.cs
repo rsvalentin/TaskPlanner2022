@@ -48,7 +48,6 @@
             this.labelWelcome.Size = new System.Drawing.Size(104, 23);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
-            this.labelWelcome.Click += new System.EventHandler(this.labelWelcome_Click);
             // 
             // btnAddList
             // 
@@ -92,7 +91,6 @@
             this.initialListGroupBox.Size = new System.Drawing.Size(146, 404);
             this.initialListGroupBox.TabIndex = 2;
             this.initialListGroupBox.TabStop = false;
-            this.initialListGroupBox.Enter += new System.EventHandler(this.initialListGroupBox_Enter);
             // 
             // quitAddingListButton
             // 

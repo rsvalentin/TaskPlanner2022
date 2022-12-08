@@ -25,14 +25,6 @@ namespace TaskPlannerPIU
         private Dictionary<Button, LastCardOfList> lastCardsOfLists = new Dictionary<Button, LastCardOfList>();
 
         public TaskPlannerWindow(MainWindow parent)
-        private MainWindow _mainWindow;
-
-        public TaskPlannerWindow(MainWindow other)
-        {
-            _mainWindow = other;
-            InitializeComponent();
-        }
-        public TaskPlannerWindow()
         {
             InitializeComponent();
             _parent = parent;
@@ -227,13 +219,15 @@ namespace TaskPlannerPIU
 
         private void groupBoxTasks_Enter(object sender, EventArgs e)
         {
-            string username = _mainWindow.getUsername();
+            string username = _parent.Username;
             this.labelWelcome.Text += username;
 
         }
 
         private void labelWelcome_Click(object sender, EventArgs e)
         {
+
+        }
         private void initialListGroupBox_Enter(object sender, EventArgs e)
         {
 
