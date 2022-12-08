@@ -46,6 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EditButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EditCardWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCardWindow.Designer.cs">
+      <DependentUpon>EditCardWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Card\LastCardOfList.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,7 +88,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include=".vs\ProjectSettings.json" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include=".vs\VSWorkspaceState.json" />
+    <None Include="bin\Debug\TaskPlannerPIU.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,9 +107,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\TaskPlannerPIU.exe" />
+    <Content Include="bin\Debug\TaskPlannerPIU.pdb" />
+    <None Include="Resources\edit_20x20.png" />
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\piu_copy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vs\TaskPlannerPIU\v17\" />
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
   </PropertyGroup>
 </Project>
