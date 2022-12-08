@@ -158,9 +158,5 @@
         private System.Windows.Forms.Button saveListButton;
         private System.Windows.Forms.Button quitAddingListButton;
 
-
-            //BackColor = System.Drawing.Color.Red;
-
-
     }
 }
