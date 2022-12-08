@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using TaskPlannerPIU.Card;
 using static TaskPlannerPIU.Helpers.Constants;
 
 namespace TaskPlannerPIU
@@ -20,6 +22,7 @@ namespace TaskPlannerPIU
         private TextBox cardMessageTextBox;
         private Button saveCardButton;
         private Button quitSavingCardButton;
+        private Dictionary<Button, LastCardOfList> lastCardsOfLists = new Dictionary<Button, LastCardOfList>();
 
         public TaskPlannerWindow(MainWindow parent)
         {
@@ -128,7 +131,8 @@ namespace TaskPlannerPIU
             _createCardBtn.Width = 70;
             _createCardBtn.Click += new System.EventHandler(this.addCardButton_Click);
 
-            cardButtonIndexList.Add(_createCardBtn, COUNTER_LISTS - 1 );
+            cardButtonIndexList.Add(_createCardBtn, COUNTER_LISTS - 1);
+            lastCardsOfLists.Add(_createCardBtn, new LastCardOfList { ListNumber = cardButtonIndexList[_createCardBtn], TaskNumberFromList = COUNTER_TASKS, YLocation = this.saveListButton.Location.Y  + 5 - 16 });
         }
 
         private void addCardButton_Click(object sender, EventArgs e)
@@ -136,6 +140,7 @@ namespace TaskPlannerPIU
             var index = cardButtonIndexList[_createCardBtn];
             var selectedGroupBox = _groupBoxesLists[index];
             var xLocation = 11;
+            var lastTaskFromList = lastCardsOfLists[_createCardBtn];
 
             _createCardBtn.Hide();
             cardMessageTextBox = new TextBox();
@@ -143,25 +148,25 @@ namespace TaskPlannerPIU
             cardMessageTextBox.Height = 30;
             cardMessageTextBox.Multiline = true;
             selectedGroupBox.Controls.Add(cardMessageTextBox);
-            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, CARD_LOCATION_Y) : new Point(xLocation, CARD_LOCATION_Y + MOVE_TASK_Y);
-            CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
+            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, DEPL_CARD_LOCATION_Y) : new Point(xLocation, lastTaskFromList.YLocation +  DEPL_CARD_LOCATION_Y + MOVE_TASK_Y);
+            DEPL_CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
             cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
 
             saveCardButton = new Button();
             selectedGroupBox.Controls.Add(saveCardButton);
             saveCardButton.Text = "Save";
-            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
+            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, DEPL_QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation, lastTaskFromList.YLocation + DEPL_QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             saveCardButton.Width = this.saveListButton.Width;
             saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
 
             quitSavingCardButton = new Button();
             selectedGroupBox.Controls.Add(quitSavingCardButton);
             quitSavingCardButton.Text = "Quit";
-            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
+            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, DEPL_QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, lastTaskFromList.YLocation + DEPL_QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             quitSavingCardButton.Width = this.saveListButton.Width;
             quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
 
-            QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
+            DEPL_QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
         }
 
         private void cardMessageTextBox_TextChanged(object sender, EventArgs e)
@@ -175,6 +180,7 @@ namespace TaskPlannerPIU
             this.quitSavingCardButton.Hide();
             this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y) : new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y + MOVE_TASK_Y);
             CREATE_CARD_LOCATION_Y = this._createCardBtn.Location.Y;
+            this.cardMessageTextBox.ReadOnly = true;
             this._createCardBtn.Show();
             COUNTER_TASKS++;
         }
