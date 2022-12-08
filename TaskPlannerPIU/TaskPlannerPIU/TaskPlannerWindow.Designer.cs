@@ -32,9 +32,9 @@
             this.btnAddList = new System.Windows.Forms.Button();
             this.groupBoxTasks = new System.Windows.Forms.GroupBox();
             this.initialListGroupBox = new System.Windows.Forms.GroupBox();
+            this.quitAddingListButton = new System.Windows.Forms.Button();
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.saveListButton = new System.Windows.Forms.Button();
-            this.quitAddingListButton = new System.Windows.Forms.Button();
             this.groupBoxTasks.SuspendLayout();
             this.initialListGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -86,23 +86,6 @@
             this.initialListGroupBox.TabIndex = 2;
             this.initialListGroupBox.TabStop = false;
             // 
-            // titleTextBox
-            // 
-            this.titleTextBox.Location = new System.Drawing.Point(15, 12);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(121, 22);
-            this.titleTextBox.TabIndex = 3;
-            // 
-            // saveListButton
-            // 
-            this.saveListButton.Location = new System.Drawing.Point(15, 40);
-            this.saveListButton.Name = "saveListButton";
-            this.saveListButton.Size = new System.Drawing.Size(58, 23);
-            this.saveListButton.TabIndex = 3;
-            this.saveListButton.Text = "Save";
-            this.saveListButton.UseVisualStyleBackColor = true;
-            this.saveListButton.Click += new System.EventHandler(this.addListButton_Click);
-            // 
             // quitAddingListButton
             // 
             this.quitAddingListButton.Location = new System.Drawing.Point(78, 40);
@@ -112,6 +95,25 @@
             this.quitAddingListButton.Text = "Quit";
             this.quitAddingListButton.UseVisualStyleBackColor = true;
             this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click_1);
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.Location = new System.Drawing.Point(15, 12);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(121, 22);
+            this.titleTextBox.TabIndex = 3;
+            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged_1);
+            // 
+            // saveListButton
+            // 
+            this.saveListButton.ForeColor = System.Drawing.Color.Black;
+            this.saveListButton.Location = new System.Drawing.Point(15, 40);
+            this.saveListButton.Name = "saveListButton";
+            this.saveListButton.Size = new System.Drawing.Size(58, 23);
+            this.saveListButton.TabIndex = 3;
+            this.saveListButton.Text = "Save";
+            this.saveListButton.UseVisualStyleBackColor = true;
+            this.saveListButton.Click += new System.EventHandler(this.addListButton_Click);
             // 
             // TaskPlannerWindow
             // 

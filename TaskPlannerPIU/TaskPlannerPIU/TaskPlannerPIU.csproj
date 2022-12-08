@@ -49,6 +49,15 @@
     <Compile Include="CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EditButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EditCardWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCardWindow.Designer.cs">
+      <DependentUpon>EditCardWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -100,6 +109,8 @@
   <ItemGroup>
     <Content Include="bin\Debug\TaskPlannerPIU.exe" />
     <Content Include="bin\Debug\TaskPlannerPIU.pdb" />
+    <None Include="Resources\edit_20x20.png" />
+    <None Include="Resources\edit.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\piu_copy.jpg" />
@@ -110,7 +121,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
   </PropertyGroup>
 </Project>

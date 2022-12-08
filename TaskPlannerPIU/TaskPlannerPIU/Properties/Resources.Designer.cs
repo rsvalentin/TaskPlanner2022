@@ -63,6 +63,16 @@ namespace TaskPlannerPIU.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap edit_20x20 {
+            get {
+                object obj = ResourceManager.GetObject("edit_20x20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap piu_copy {
             get {
                 object obj = ResourceManager.GetObject("piu_copy", resourceCulture);

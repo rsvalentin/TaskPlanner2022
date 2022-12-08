@@ -137,10 +137,9 @@ namespace TaskPlannerPIU
             var yLocation = selectedGroupBox.Location.Y; 
 
             _createCardBtn.Hide();
-            TextBox cardMessageTextBox = new TextBox();
+            EditButton cardMessageTextBox = new EditButton();
             cardMessageTextBox.Width = this.titleTextBox.Width;
             cardMessageTextBox.Height = 30;
-            cardMessageTextBox.Multiline = true;
             selectedGroupBox.Controls.Add(cardMessageTextBox);
             cardMessageTextBox.Location = new Point(xLocation, yLocation + 25);
             cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
@@ -148,6 +147,7 @@ namespace TaskPlannerPIU
             Button saveCardButton = new Button();
             selectedGroupBox.Controls.Add(saveCardButton);
             saveCardButton.Text = "Save";
+            saveCardButton.BackColor = Color.Red;
             saveCardButton.Location = new Point(xLocation, yLocation + 55);
             saveCardButton.Width = this.saveListButton.Width;
             saveCardButton.Click += new System.EventHandler(this.addCardButton_Click);
@@ -165,5 +165,19 @@ namespace TaskPlannerPIU
 
         }
 
+        private void titleTextBox_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editButton2_btnClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("oare merge?");
+        }
     }
 }
