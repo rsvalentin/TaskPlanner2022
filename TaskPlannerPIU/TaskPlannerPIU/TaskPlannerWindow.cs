@@ -148,25 +148,25 @@ namespace TaskPlannerPIU
             cardMessageTextBox.Height = 30;
             cardMessageTextBox.Multiline = true;
             selectedGroupBox.Controls.Add(cardMessageTextBox);
-            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, DEPL_CARD_LOCATION_Y) : new Point(xLocation, lastTaskFromList.YLocation +  DEPL_CARD_LOCATION_Y + MOVE_TASK_Y);
-            DEPL_CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
+            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, CARD_LOCATION_Y) : new Point(xLocation, CARD_LOCATION_Y + MOVE_TASK_Y);
+            CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
             cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
 
             saveCardButton = new Button();
             selectedGroupBox.Controls.Add(saveCardButton);
             saveCardButton.Text = "Save";
-            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, DEPL_QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation, lastTaskFromList.YLocation + DEPL_QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
+            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation,QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             saveCardButton.Width = this.saveListButton.Width;
             saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
 
             quitSavingCardButton = new Button();
             selectedGroupBox.Controls.Add(quitSavingCardButton);
             quitSavingCardButton.Text = "Quit";
-            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, DEPL_QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, lastTaskFromList.YLocation + DEPL_QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
+            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             quitSavingCardButton.Width = this.saveListButton.Width;
             quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
 
-            DEPL_QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
+            QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
         }
 
         private void cardMessageTextBox_TextChanged(object sender, EventArgs e)
