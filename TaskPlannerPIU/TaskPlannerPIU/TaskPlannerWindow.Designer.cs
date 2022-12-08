@@ -42,28 +42,32 @@
             // labelWelcome
             // 
             this.labelWelcome.AutoSize = true;
-            this.labelWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWelcome.Font = new System.Drawing.Font("Lucida Handwriting", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWelcome.Location = new System.Drawing.Point(11, 7);
             this.labelWelcome.Name = "labelWelcome";
-            this.labelWelcome.Size = new System.Drawing.Size(88, 20);
+            this.labelWelcome.Size = new System.Drawing.Size(104, 23);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
             // 
             // btnAddList
             // 
             this.btnAddList.AllowDrop = true;
+            this.btnAddList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.btnAddList.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddList.ForeColor = System.Drawing.Color.Black;
             this.btnAddList.Location = new System.Drawing.Point(25, 40);
             this.btnAddList.Name = "btnAddList";
             this.btnAddList.Size = new System.Drawing.Size(91, 28);
             this.btnAddList.TabIndex = 1;
             this.btnAddList.Text = "Add a list";
             this.btnAddList.UseMnemonic = false;
-            this.btnAddList.UseVisualStyleBackColor = true;
+            this.btnAddList.UseVisualStyleBackColor = false;
             this.btnAddList.Click += new System.EventHandler(this.btnAddList_Click);
             // 
             // groupBoxTasks
             // 
             this.groupBoxTasks.AutoSize = true;
+            this.groupBoxTasks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(201)))), ((int)(((byte)(196)))));
             this.groupBoxTasks.Controls.Add(this.initialListGroupBox);
             this.groupBoxTasks.Location = new System.Drawing.Point(25, 59);
             this.groupBoxTasks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -71,9 +75,11 @@
             this.groupBoxTasks.Size = new System.Drawing.Size(922, 448);
             this.groupBoxTasks.TabIndex = 2;
             this.groupBoxTasks.TabStop = false;
+            this.groupBoxTasks.Enter += new System.EventHandler(this.groupBoxTasks_Enter);
             // 
             // initialListGroupBox
             // 
+            this.initialListGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(159)))), ((int)(((byte)(153)))));
             this.initialListGroupBox.Controls.Add(this.quitAddingListButton);
             this.initialListGroupBox.Controls.Add(this.titleTextBox);
             this.initialListGroupBox.Controls.Add(this.saveListButton);
@@ -85,15 +91,19 @@
             this.initialListGroupBox.Size = new System.Drawing.Size(146, 404);
             this.initialListGroupBox.TabIndex = 2;
             this.initialListGroupBox.TabStop = false;
+            this.initialListGroupBox.Enter += new System.EventHandler(this.initialListGroupBox_Enter);
             // 
             // quitAddingListButton
             // 
+            this.quitAddingListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.quitAddingListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitAddingListButton.ForeColor = System.Drawing.Color.White;
             this.quitAddingListButton.Location = new System.Drawing.Point(78, 40);
             this.quitAddingListButton.Name = "quitAddingListButton";
             this.quitAddingListButton.Size = new System.Drawing.Size(58, 23);
             this.quitAddingListButton.TabIndex = 4;
             this.quitAddingListButton.Text = "Quit";
-            this.quitAddingListButton.UseVisualStyleBackColor = true;
+            this.quitAddingListButton.UseVisualStyleBackColor = false;
             this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click_1);
             // 
             // titleTextBox
@@ -102,21 +112,26 @@
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(121, 22);
             this.titleTextBox.TabIndex = 3;
+            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged_1);
             // 
             // saveListButton
             // 
+            this.saveListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.saveListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveListButton.ForeColor = System.Drawing.Color.Black;
             this.saveListButton.Location = new System.Drawing.Point(15, 40);
             this.saveListButton.Name = "saveListButton";
             this.saveListButton.Size = new System.Drawing.Size(58, 23);
             this.saveListButton.TabIndex = 3;
             this.saveListButton.Text = "Save";
-            this.saveListButton.UseVisualStyleBackColor = true;
+            this.saveListButton.UseVisualStyleBackColor = false;
             this.saveListButton.Click += new System.EventHandler(this.addListButton_Click);
             // 
             // TaskPlannerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::TaskPlannerPIU.Properties.Resources.piu_copy;
             this.ClientSize = new System.Drawing.Size(982, 553);
             this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.groupBoxTasks);
@@ -142,5 +157,6 @@
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Button saveListButton;
         private System.Windows.Forms.Button quitAddingListButton;
+
     }
 }

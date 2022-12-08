@@ -19,7 +19,7 @@ namespace TaskPlannerPIU
         private GroupBox _listGroupBox;
         private Button _createCardBtn;
         private Dictionary<Button, int> cardButtonIndexList = new Dictionary<Button, int>();
-        private TextBox cardMessageTextBox;
+        private EditButton cardMessageTextBox;
         private Button saveCardButton;
         private Button quitSavingCardButton;
         private Dictionary<Button, LastCardOfList> lastCardsOfLists = new Dictionary<Button, LastCardOfList>();
@@ -37,6 +37,8 @@ namespace TaskPlannerPIU
         private void TaskPlannerWindow_Load(object sender, EventArgs e)
         {
             this.labelWelcome.Text += _parent.Username + "!";
+            this.labelWelcome.Font = new System.Drawing.Font("Lucida Handwriting", 10.2F, System.Drawing.FontStyle.Bold);
+            this.labelWelcome.BackColor = Color.Transparent;
             _groupBoxesLists.Add(this.initialListGroupBox);
         }
 
@@ -113,6 +115,7 @@ namespace TaskPlannerPIU
         private void createNewGroupBoxForColumn()
         {
             this._listGroupBox = new GroupBox();
+            this._listGroupBox.BackColor = Color.FromArgb(255, 52, 159, 153);
             this._groupBoxesLists.Add(_listGroupBox);
             this._listGroupBox.Location = new Point(LIST_GROUPBOX_POSITION_X + MOVE_GROUPBOX_X, this.initialListGroupBox.Location.Y);
             LIST_GROUPBOX_POSITION_X = _listGroupBox.Location.X;
@@ -126,6 +129,9 @@ namespace TaskPlannerPIU
         {
             _createCardBtn = new Button();
             _createCardBtn.Text = "Add card";
+            _createCardBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
+
+            _createCardBtn.BackColor = Color.FromArgb(255, 187, 10, 33);
             this._listGroupBox.Controls.Add(_createCardBtn);
             _createCardBtn.Location = new Point(this.saveListButton.Location.X, this.saveListButton.Location.Y + 5);
             _createCardBtn.Width = 70;
@@ -143,10 +149,9 @@ namespace TaskPlannerPIU
             var lastTaskFromList = lastCardsOfLists[_createCardBtn];
 
             _createCardBtn.Hide();
-            cardMessageTextBox = new TextBox();
+            cardMessageTextBox = new EditButton();
             cardMessageTextBox.Width = this.titleTextBox.Width;
             cardMessageTextBox.Height = 30;
-            cardMessageTextBox.Multiline = true;
             selectedGroupBox.Controls.Add(cardMessageTextBox);
             cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, CARD_LOCATION_Y) : new Point(xLocation, CARD_LOCATION_Y + MOVE_TASK_Y);
             CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
@@ -155,6 +160,10 @@ namespace TaskPlannerPIU
             saveCardButton = new Button();
             selectedGroupBox.Controls.Add(saveCardButton);
             saveCardButton.Text = "Save";
+            saveCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
+
+            saveCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
+
             saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation,QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             saveCardButton.Width = this.saveListButton.Width;
             saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
@@ -162,6 +171,9 @@ namespace TaskPlannerPIU
             quitSavingCardButton = new Button();
             selectedGroupBox.Controls.Add(quitSavingCardButton);
             quitSavingCardButton.Text = "Quit";
+            quitSavingCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F,System.Drawing.FontStyle.Bold);
+            quitSavingCardButton.ForeColor = System.Drawing.Color.White;
+            quitSavingCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
             quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
             quitSavingCardButton.Width = this.saveListButton.Width;
             quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
@@ -180,15 +192,39 @@ namespace TaskPlannerPIU
             this.quitSavingCardButton.Hide();
             this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y) : new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y + MOVE_TASK_Y);
             CREATE_CARD_LOCATION_Y = this._createCardBtn.Location.Y;
-            this.cardMessageTextBox.ReadOnly = true;
+            this.cardMessageTextBox.cardMessageTextBox.ReadOnly = true;
             this._createCardBtn.Show();
             COUNTER_TASKS++;
         }
 
         private void quitSavingCardButton_Click(object sender, EventArgs e)
         {
+            _currentListTextBox.Text = "";
+        }
+
+        private void titleTextBox_TextChanged_1(object sender, EventArgs e)
+        {
 
         }
 
+        private void editButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editButton2_btnClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("oare merge?");
+        }
+
+        private void groupBoxTasks_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void initialListGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
