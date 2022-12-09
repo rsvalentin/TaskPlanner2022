@@ -48,6 +48,7 @@
             this.labelWelcome.Size = new System.Drawing.Size(104, 23);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
+            this.labelWelcome.Click += new System.EventHandler(this.labelWelcome_Click_1);
             // 
             // btnAddList
             // 

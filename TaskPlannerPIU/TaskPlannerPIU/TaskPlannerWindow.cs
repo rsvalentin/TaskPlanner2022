@@ -220,7 +220,6 @@ namespace TaskPlannerPIU
         private void groupBoxTasks_Enter(object sender, EventArgs e)
         {
             string username = _parent.Username;
-            this.labelWelcome.Text += username;
 
         }
 
@@ -229,6 +228,11 @@ namespace TaskPlannerPIU
 
         }
         private void initialListGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelWelcome_Click_1(object sender, EventArgs e)
         {
 
         }
