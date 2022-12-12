@@ -134,7 +134,10 @@
             this.ClientSize = new System.Drawing.Size(982, 553);
             this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.groupBoxTasks);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "TaskPlannerWindow";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.TaskPlannerWindow_Load);
