@@ -35,8 +35,8 @@ namespace TaskPlannerPIU.Helpers
         public static int LIST_GROUPBOX_POSITION_Y = 20;
 
         public static int MOVE_TASK_Y = 40;
-        public static int CARD_LOCATION_Y = 16 + 25;
-        public static int QUIT_SAVE_CARD_LOCATION_Y = 16 + 55;
+        public static int CARD_LOCATION_Y = 12;
+        public static int QUIT_SAVE_CARD_LOCATION_Y = 40;
         public static int CREATE_CARD_LOCATION_Y = 30 + 55;
     }
 }

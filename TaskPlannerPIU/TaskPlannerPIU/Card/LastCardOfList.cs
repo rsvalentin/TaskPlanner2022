@@ -12,6 +12,10 @@ namespace TaskPlannerPIU.Card
 
         public int ListNumber { get; set; }
 
-        public int YLocation { get; set; }
+        public int YCardLocation { get; set; }
+
+        public int YSQLocation { get; set; }
+
+        public int YCreateCardLocation { get; set; }
     }
 }

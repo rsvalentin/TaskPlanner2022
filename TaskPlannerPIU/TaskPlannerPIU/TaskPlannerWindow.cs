@@ -11,18 +11,19 @@ namespace TaskPlannerPIU
 {
     public partial class TaskPlannerWindow : Form
     {
-        private List<GroupBox> _groupBoxesLists = new List<GroupBox>();
         private MainWindow _parent;
+
+        private List<GroupBox> _groupBoxesLists = new List<GroupBox>();
         private TextBox _currentListTextBox;
         private string _selectedColumnName;
         private string _selectedTaskContent;
         private GroupBox _listGroupBox;
         private Button _createCardBtn;
         private Dictionary<Button, int> cardButtonIndexList = new Dictionary<Button, int>();
-        private EditButton cardMessageTextBox;
-        private Button saveCardButton;
-        private Button quitSavingCardButton;
-        private Dictionary<Button, LastCardOfList> lastCardsOfLists = new Dictionary<Button, LastCardOfList>();
+        private EditButton _editButton;
+        private Button _saveCardButton;
+        private Button _quitSavingCardButton;
+        private Dictionary<GroupBox, LastCardOfList> lastCardOfSelectedGroupBox = new Dictionary<GroupBox, LastCardOfList>();
 
         public TaskPlannerWindow(MainWindow parent)
         {
@@ -138,7 +139,7 @@ namespace TaskPlannerPIU
             _createCardBtn.Click += new System.EventHandler(this.addCardButton_Click);
 
             cardButtonIndexList.Add(_createCardBtn, COUNTER_LISTS - 1);
-            lastCardsOfLists.Add(_createCardBtn, new LastCardOfList { ListNumber = cardButtonIndexList[_createCardBtn], TaskNumberFromList = COUNTER_TASKS, YLocation = this.saveListButton.Location.Y  + 5 - 16 });
+            
         }
 
         private void addCardButton_Click(object sender, EventArgs e)
@@ -146,55 +147,102 @@ namespace TaskPlannerPIU
             var index = cardButtonIndexList[_createCardBtn];
             var selectedGroupBox = _groupBoxesLists[index];
             var xLocation = 11;
-            var lastTaskFromList = lastCardsOfLists[_createCardBtn];
+            int yCardLocation;
+            int ySQLocation;
+            if(lastCardOfSelectedGroupBox.ContainsKey(selectedGroupBox))
+            {
+                yCardLocation = lastCardOfSelectedGroupBox[selectedGroupBox].YCardLocation;
+                ySQLocation = lastCardOfSelectedGroupBox[selectedGroupBox].YSQLocation;
+            }
+            else
+            {
+                yCardLocation = CARD_LOCATION_Y;
+                ySQLocation = QUIT_SAVE_CARD_LOCATION_Y;
+            }
 
             _createCardBtn.Hide();
-            cardMessageTextBox = new EditButton();
-            cardMessageTextBox.Width = this.titleTextBox.Width;
-            cardMessageTextBox.Height = 30;
-            selectedGroupBox.Controls.Add(cardMessageTextBox);
-            cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, CARD_LOCATION_Y) : new Point(xLocation, CARD_LOCATION_Y + MOVE_TASK_Y);
-            CARD_LOCATION_Y = cardMessageTextBox.Location.Y;
-            cardMessageTextBox.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
+            _editButton = new EditButton(selectedGroupBox);
+            _editButton.Width = this.titleTextBox.Width;
+            _editButton.Height = 30;
+            _editButton.cardMessageTextBox.Location = COUNTER_TASKS == 1 ? new Point(xLocation, yCardLocation) : new Point(xLocation, yCardLocation + MOVE_TASK_Y);
+            _editButton.TextChanged += new System.EventHandler(this.cardMessageTextBox_TextChanged);
 
-            saveCardButton = new Button();
-            selectedGroupBox.Controls.Add(saveCardButton);
-            saveCardButton.Text = "Save";
-            saveCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
+            _saveCardButton = new Button();
+            selectedGroupBox.Controls.Add(_saveCardButton);
+            _saveCardButton.Text = "Save";
+            _saveCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
 
-            saveCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
+            _saveCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
 
-            saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation,QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
-            saveCardButton.Width = this.saveListButton.Width;
-            saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
+            _saveCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation, ySQLocation) : new Point(xLocation, ySQLocation + MOVE_TASK_Y);
+            _saveCardButton.Width = this.saveListButton.Width;
+            _saveCardButton.Click += new System.EventHandler(this.saveCardButton_Click);
+            ControlExtension.Draggable(_saveCardButton, true);
 
-            quitSavingCardButton = new Button();
-            selectedGroupBox.Controls.Add(quitSavingCardButton);
-            quitSavingCardButton.Text = "Quit";
-            quitSavingCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F,System.Drawing.FontStyle.Bold);
-            quitSavingCardButton.ForeColor = System.Drawing.Color.White;
-            quitSavingCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
-            quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y) : new Point(xLocation + 52, QUIT_SAVE_CARD_LOCATION_Y + MOVE_TASK_Y);
-            quitSavingCardButton.Width = this.saveListButton.Width;
-            quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
+            _quitSavingCardButton = new Button();
+            selectedGroupBox.Controls.Add(_quitSavingCardButton);
+            _quitSavingCardButton.Text = "Quit";
+            _quitSavingCardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F,System.Drawing.FontStyle.Bold);
+            _quitSavingCardButton.ForeColor = System.Drawing.Color.White;
+            _quitSavingCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
+            _quitSavingCardButton.Location = COUNTER_TASKS == 1 ? new Point(xLocation + 52, ySQLocation) : new Point(xLocation + 52, ySQLocation + MOVE_TASK_Y);
+            _quitSavingCardButton.Width = this.saveListButton.Width;
+            _quitSavingCardButton.Click += new System.EventHandler(this.quitSavingCardButton_Click);
 
-            QUIT_SAVE_CARD_LOCATION_Y = saveCardButton.Location.Y;
+            if (lastCardOfSelectedGroupBox.ContainsKey(selectedGroupBox))
+                lastCardOfSelectedGroupBox[selectedGroupBox] = 
+                    new LastCardOfList { 
+                        ListNumber = cardButtonIndexList[_createCardBtn], 
+                        TaskNumberFromList = COUNTER_TASKS, 
+                        YCardLocation = _editButton.cardMessageTextBox.Location.Y, 
+                        YSQLocation = _saveCardButton.Location.Y ,
+                        YCreateCardLocation = this._createCardBtn.Location.Y
+                    };
+            else
+                lastCardOfSelectedGroupBox.Add(selectedGroupBox, 
+                    new LastCardOfList { 
+                        ListNumber = cardButtonIndexList[_createCardBtn], 
+                        TaskNumberFromList = COUNTER_TASKS, 
+                        YCardLocation = _editButton.cardMessageTextBox.Location.Y, 
+                        YSQLocation = _saveCardButton.Location.Y,
+                        YCreateCardLocation = this._createCardBtn.Location.Y
+                        });
+
         }
 
         private void cardMessageTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            this._selectedTaskContent = _editButton.cardMessageTextBox.Text;
         }
 
         private void saveCardButton_Click(object sender, EventArgs e)
         {
-            this.saveCardButton.Hide();
-            this.quitSavingCardButton.Hide();
-            this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y) : new Point(this._createCardBtn.Location.X, CREATE_CARD_LOCATION_Y + MOVE_TASK_Y);
-            CREATE_CARD_LOCATION_Y = this._createCardBtn.Location.Y;
-            this.cardMessageTextBox.cardMessageTextBox.ReadOnly = true;
+            var index = cardButtonIndexList[_createCardBtn];
+            var selectedGroupBox = _groupBoxesLists[index];
+
+            int yCreateCardLocation;
+
+            yCreateCardLocation = lastCardOfSelectedGroupBox[selectedGroupBox].YCardLocation;
+   
+
+            _editButton.EnableDraggable();
+            this._saveCardButton.Hide();
+            this._quitSavingCardButton.Hide();
+            this._createCardBtn.Location = COUNTER_TASKS == 1 ? new Point(this._createCardBtn.Location.X, yCreateCardLocation) : new Point(this._createCardBtn.Location.X, yCreateCardLocation + MOVE_TASK_Y);
+            this._editButton.cardMessageTextBox.ReadOnly = true;
             this._createCardBtn.Show();
             COUNTER_TASKS++;
+
+            lastCardOfSelectedGroupBox[selectedGroupBox] =
+                        new LastCardOfList
+                        {
+                            ListNumber = cardButtonIndexList[_createCardBtn],
+                            TaskNumberFromList = COUNTER_TASKS,
+                            YCardLocation = _editButton.cardMessageTextBox.Location.Y,
+                            YSQLocation = _saveCardButton.Location.Y,
+                            YCreateCardLocation = this._createCardBtn.Location.Y
+                        };
+
         }
 
         private void quitSavingCardButton_Click(object sender, EventArgs e)
@@ -202,38 +250,9 @@ namespace TaskPlannerPIU
             _currentListTextBox.Text = "";
         }
 
-        private void titleTextBox_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void editButton3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void editButton2_btnClick(object sender, EventArgs e)
-        {
-            MessageBox.Show("oare merge?");
-        }
-
         private void groupBoxTasks_Enter(object sender, EventArgs e)
         {
             string username = _parent.Username;
-
-        }
-
-        private void labelWelcome_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void initialListGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelWelcome_Click_1(object sender, EventArgs e)
-        {
 
         }
 

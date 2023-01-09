@@ -49,7 +49,6 @@
             this.labelWelcome.Size = new System.Drawing.Size(104, 23);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
-            this.labelWelcome.Click += new System.EventHandler(this.labelWelcome_Click_1);
             // 
             // btnAddList
             // 
@@ -113,7 +112,7 @@
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(121, 22);
             this.titleTextBox.TabIndex = 3;
-            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged_1);
+            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             // 
             // saveListButton
             // 
