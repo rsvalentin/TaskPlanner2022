@@ -236,5 +236,11 @@ namespace TaskPlannerPIU
         {
 
         }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this._parent.Show();
+        }
     }
 }

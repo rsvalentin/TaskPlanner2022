@@ -50,7 +50,6 @@
             this.label1.Size = new System.Drawing.Size(382, 69);
             this.label1.TabIndex = 0;
             this.label1.Text = "Task Planner";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -105,7 +104,7 @@
             this.customButton1.TabIndex = 7;
             this.customButton1.Text = "Next";
             this.customButton1.UseVisualStyleBackColor = false;
-            this.customButton1.Click += new System.EventHandler(this.customButton1_Click);
+            this.customButton1.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // MainWindow
             // 
@@ -126,8 +125,8 @@
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.Resize += new System.EventHandler(this.MainWindow_Resize);
+            //this.Load += new System.EventHandler(this.MainWindow_Load);
+            //this.Resize += new System.EventHandler(this.MainWindow_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
