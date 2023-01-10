@@ -48,7 +48,6 @@
             this.labelWelcome.Size = new System.Drawing.Size(104, 23);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Welcome, ";
-            this.labelWelcome.Click += new System.EventHandler(this.labelWelcome_Click_1);
             // 
             // btnAddList
             // 
@@ -112,13 +111,12 @@
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(121, 22);
             this.titleTextBox.TabIndex = 3;
-            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged_1);
             // 
             // saveListButton
             // 
             this.saveListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
             this.saveListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveListButton.ForeColor = System.Drawing.Color.Black;
+            this.saveListButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.saveListButton.Location = new System.Drawing.Point(15, 40);
             this.saveListButton.Name = "saveListButton";
             this.saveListButton.Size = new System.Drawing.Size(58, 23);
@@ -140,7 +138,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TaskPlannerWindow";
-            this.Text = "Form2";
+            this.Text = "Task Planner";
             this.Load += new System.EventHandler(this.TaskPlannerWindow_Load);
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.TaskPlannerWindow_Scroll);
             this.groupBoxTasks.ResumeLayout(false);
