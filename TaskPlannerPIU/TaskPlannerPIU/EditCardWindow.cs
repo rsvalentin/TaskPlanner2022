@@ -35,7 +35,12 @@ namespace TaskPlannerPIU
             //trebuie actualizat si db-ul
             //parent.getEditButton().cardMessageTextBox.Text = this.editCardTitle.Text;
             textBox.Text = text;
+            this.Close();
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

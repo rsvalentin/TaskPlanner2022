@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.saveChangesButton = new TaskPlannerPIU.CustomButton();
             this.editCardTitle = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.saveChangesButton = new TaskPlannerPIU.CustomButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,14 +46,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
-            // 
-            // editCardTitle
-            // 
-            this.editCardTitle.Location = new System.Drawing.Point(21, 45);
-            this.editCardTitle.Name = "editCardTitle";
-            this.editCardTitle.Size = new System.Drawing.Size(392, 22);
-            this.editCardTitle.TabIndex = 0;
-            this.editCardTitle.TextChanged += new System.EventHandler(this.editCardTitle_TextChanged);
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // saveChangesButton
             // 
@@ -69,6 +62,14 @@
             this.saveChangesButton.Text = "Save changes";
             this.saveChangesButton.UseVisualStyleBackColor = false;
             this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            // 
+            // editCardTitle
+            // 
+            this.editCardTitle.Location = new System.Drawing.Point(21, 45);
+            this.editCardTitle.Name = "editCardTitle";
+            this.editCardTitle.Size = new System.Drawing.Size(392, 22);
+            this.editCardTitle.TabIndex = 0;
+            this.editCardTitle.TextChanged += new System.EventHandler(this.editCardTitle_TextChanged);
             // 
             // EditCardWindow
             // 

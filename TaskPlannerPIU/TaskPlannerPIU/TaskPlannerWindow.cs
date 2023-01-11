@@ -152,10 +152,6 @@ namespace TaskPlannerPIU
             saveCardButton.Click += new EventHandler(this.saveCard_Click);
             flp.Controls.Add(saveCardButton);
             map.Add(saveCardButton, editButton);
-            if (clickSave == true)
-            {
-                editButton.Enabled = false;
-            }
         }
 
         private void flp_DragEnter(object sender, DragEventArgs e)
@@ -171,6 +167,7 @@ namespace TaskPlannerPIU
         private void saveCard_Click(object sender, EventArgs e)
         {
             String msg = map[saveCardButton].Text.ToString();
+            editButton.cardMessageTextBox.ReadOnly = true;
             saveCardButton.Hide();
         }
 
