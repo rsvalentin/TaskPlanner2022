@@ -46,7 +46,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // editCardTitle
             // 
@@ -54,7 +53,7 @@
             this.editCardTitle.Name = "editCardTitle";
             this.editCardTitle.Size = new System.Drawing.Size(392, 22);
             this.editCardTitle.TabIndex = 0;
-            this.editCardTitle.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.editCardTitle.TextChanged += new System.EventHandler(this.editCardTitle_TextChanged);
             // 
             // saveChangesButton
             // 

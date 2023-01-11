@@ -12,16 +12,18 @@ namespace TaskPlannerPIU
     public class EditButton : Control
     {
         //vreau sa creez un textbox personalizat, cu buton de edit in interiorul lui
-        public TextBox cardMessageTextBox = new TextBox();
-        private Button btn = new Button();
-        private TaskPlannerWindow parent;
+        public TextBox cardMessageTextBox;
+        private Button btn;
         private EditCardWindow editWindow;
+        private FlowLayoutPanel flp;
 
-        public EditButton(TaskPlannerWindow taskPlannerWindow)
+        public EditButton(FlowLayoutPanel flp)
         {
-            parent = taskPlannerWindow;
-            this.cardMessageTextBox.Parent = this;
-            base.Controls.Add(cardMessageTextBox);
+            this.flp = flp;
+            cardMessageTextBox = new TextBox();
+            btn = new Button();
+            // this.cardMessageTextBox.Parent = this;
+            flp.Controls.Add(cardMessageTextBox);
             cardMessageTextBox.Multiline = true;
 
             btn.Size = new Size(30, cardMessageTextBox.ClientSize.Height);
@@ -48,8 +50,9 @@ namespace TaskPlannerPIU
         private void EditButton_Click(object sender, EventArgs e)
         {
             //pt un parent, ar trbui sa am mai multe EditButton uri!!!
-            EditCardWindow editCardWindow = new EditCardWindow(parent);
+            EditCardWindow editCardWindow = new EditCardWindow(cardMessageTextBox);
             editCardWindow.Show();
+
         }
     }
 }

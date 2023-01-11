@@ -57,7 +57,7 @@
             this.saveListButton.TabIndex = 3;
             this.saveListButton.Text = "Save";
             this.saveListButton.UseVisualStyleBackColor = false;
-            this.saveListButton.Click += new System.EventHandler(this.addListButton_Click);
+            this.saveListButton.Click += new System.EventHandler(this.saveListButton_Click);
             // 
             // quitAddingListButton
             // 
@@ -70,7 +70,7 @@
             this.quitAddingListButton.TabIndex = 4;
             this.quitAddingListButton.Text = "Quit";
             this.quitAddingListButton.UseVisualStyleBackColor = false;
-            this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click_1);
+            this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click);
             // 
             // titleTextBox
             // 
@@ -101,8 +101,9 @@
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(132, 45);
             this.buttonBack.TabIndex = 5;
-            this.buttonBack.Text = "button1";
+            this.buttonBack.Text = "Back";
             this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // TaskPlannerWindow
             // 
