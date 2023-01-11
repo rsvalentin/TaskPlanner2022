@@ -34,7 +34,7 @@
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.customButton1 = new TaskPlannerPIU.CustomButton();
+            this.buttonNext = new TaskPlannerPIU.CustomButton();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +50,6 @@
             this.label1.Size = new System.Drawing.Size(382, 69);
             this.label1.TabIndex = 0;
             this.label1.Text = "Task Planner";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -92,20 +91,20 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Password";
             // 
-            // customButton1
+            // buttonNext
             // 
-            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
-            this.customButton1.FlatAppearance.BorderSize = 0;
-            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customButton1.ForeColor = System.Drawing.Color.White;
-            this.customButton1.Location = new System.Drawing.Point(368, 290);
-            this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(150, 40);
-            this.customButton1.TabIndex = 7;
-            this.customButton1.Text = "Next";
-            this.customButton1.UseVisualStyleBackColor = false;
-            this.customButton1.Click += new System.EventHandler(this.customButton1_Click);
+            this.buttonNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.buttonNext.FlatAppearance.BorderSize = 0;
+            this.buttonNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNext.ForeColor = System.Drawing.Color.White;
+            this.buttonNext.Location = new System.Drawing.Point(368, 290);
+            this.buttonNext.Name = "buttonNext";
+            this.buttonNext.Size = new System.Drawing.Size(150, 40);
+            this.buttonNext.TabIndex = 7;
+            this.buttonNext.Text = "Next";
+            this.buttonNext.UseVisualStyleBackColor = false;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // MainWindow
             // 
@@ -115,7 +114,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(898, 618);
             this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.customButton1);
+            this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -127,7 +126,6 @@
             this.Name = "MainWindow";
             this.Text = "Welcome Page";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.Resize += new System.EventHandler(this.MainWindow_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,7 +138,7 @@
         private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label4;
-        private CustomButton customButton1;
+        private CustomButton buttonNext;
     }
 }
 

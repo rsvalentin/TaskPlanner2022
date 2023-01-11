@@ -18,7 +18,7 @@ namespace TaskPlannerPIU
         {
             InitializeComponent();
             parent = taskPlannerWindow;
-            this.editCardTitle.Text = parent.currentCard;
+            //this.editCardTitle.Text = parent.currentCard;
             //DE CE  INCA ISI FACE RESIZE formul?
             taskPlannerWindow.FormBorderStyle = FormBorderStyle.FixedSingle;
 
@@ -36,7 +36,7 @@ namespace TaskPlannerPIU
         {
             //cand dau click tre sa se salveze info din input in textboxul din interfata TaskPlanner
             //trebuie actualizat si db-ul
-            parent.getEditButton().cardMessageTextBox.Text = this.editCardTitle.Text;
+            //parent.getEditButton().cardMessageTextBox.Text = this.editCardTitle.Text;
             
         }
 
