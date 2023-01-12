@@ -1,32 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
-using TaskPlannerPIU.Card;
-using static TaskPlannerPIU.Helpers.Constants;
+using TaskPlannerPIU.database;
 
 namespace TaskPlannerPIU
 {
     public partial class TaskPlannerWindow : Form
     {
         private MainWindow _parent;
+        private EditButton _editButton;
+        private Button _addCardButton;
+        private Button _saveCardButton;
+
+        private Dictionary<Button, int> _addCardButtonIndex = new Dictionary<Button, int>();
+        private Dictionary<Button, EditButton> _saveCardButtonEditButton = new Dictionary<Button, EditButton>();
         private string _selectedColumnName;
-        private EditButton editButton;
-        private Button addCardButton;
-        private Button saveCardButton;
-        private Button quitSavingCardButton;
+        private int _counterFlp = 0;
+        private int _lastX = 0;
 
-        int lastX = 0;
-        bool clickSave = false;
-        private Dictionary<Button, int> adds = new Dictionary<Button, int>();
-        private Dictionary<FlowLayoutPanel, int> mp = new Dictionary<FlowLayoutPanel, int>();
-        private Dictionary<Button, EditButton> map = new Dictionary<Button, EditButton>();
-        List<FlowLayoutPanel> flps = new List<FlowLayoutPanel>();
-        int counterFlp = 0;
 
-        public TaskPlannerWindow(MainWindow parent)
+        public TaskPlannerWindow(MainWindow parent, DatabaseConnection connection)
         {
             InitializeComponent();
             _parent = parent;
@@ -52,43 +46,33 @@ namespace TaskPlannerPIU
             this.titleTextBox.Show();
 
             FlowLayoutPanel flp = createFlp();
-            lastX = saveListButton.Location.X;
-            flp.Location = new Point(lastX - 12, saveListButton.Location.Y + 35);
-            lastX = flp.Location.X;
-
-            _selectedColumnName = titleTextBox.Text;
-            titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
+            _lastX = saveListButton.Location.X;
+            flp.Location = new Point(_lastX - 12, saveListButton.Location.Y + 35);
+            _lastX = flp.Location.X;
 
             titleTextBox.Width = 121;
             titleTextBox.IsPassswordText = true;
-            addCardButton = new Button();
-            addCardButton.Text = "Add Card";
-            addCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
-            flp.Name = "flp";
-            addCardButton.Width = 100;
-            addCardButton.Height = 28;
 
-            this.Controls.Add(flp);           
-            flp.Controls.Add(addCardButton);                
+            _addCardButton = new Button();
+            _addCardButton.Text = "Add Card";
+            _addCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
+            _addCardButton.Width = 100;
+            _addCardButton.Height = 28;
 
-            addCardButton.Click += new EventHandler(this.addCard_click);
-            counterFlp++;
-            addCardButton.Name = "Add" + counterFlp;
-            adds.Add(addCardButton, counterFlp);
-            mp.Add(flp, counterFlp);
-            flps.Add(flp);  
+            this.Controls.Add(flp);
+            flp.Controls.Add(_addCardButton);
+
+            _addCardButton.Click += new EventHandler(this.addCard_click);
+            _counterFlp++;
+            _addCardButton.Name = "Add" + _counterFlp;
+            _addCardButtonIndex.Add(_addCardButton, _counterFlp);
         }
 
         private void quitAddingListButton_Click(object sender, EventArgs e)
         {
-             titleTextBox.Text = "";
+            titleTextBox.myTextBox.Text = "";
         }
 
-        private void titleTextBox_TextChanged(object sender, EventArgs e)
-        {
-            _selectedColumnName = titleTextBox.Text;
-            
-        }
 
         private void TaskPlannerWindow_Scroll(object sender, ScrollEventArgs e)
         {
@@ -97,25 +81,34 @@ namespace TaskPlannerPIU
 
         private void saveListButton_Click(object sender, EventArgs e)
         {
+            _selectedColumnName = titleTextBox.Text;
+            if (_selectedColumnName == null || _selectedColumnName == "")
+            {
+                MessageBox.Show("You didn't enter a title!");
+                return;
+            }
+
             CustomTextBox textBox = new CustomTextBox();
             textBox.Location = titleTextBox.Location;
             textBox.Width = 121;
-
-            var text = _selectedColumnName;
-            textBox.Text = text;
             textBox.Height = 26;
-            titleTextBox.Location = new Point(this.titleTextBox.Location.X + 150, this.titleTextBox.Location.Y);
-            titleTextBox.Hide();
-            titleTextBox.Text = "";
             this.Controls.Add(textBox);
             textBox.Show();
+            textBox.Focus();
+            titleTextBox.Location = new Point(this.titleTextBox.Location.X + 150, this.titleTextBox.Location.Y);
+            titleTextBox.Hide();
+
+            textBox.myTextBox.Text = _selectedColumnName;
+            textBox.myTextBox.ReadOnly = true;
+            textBox.IsPassswordText = true;
+            titleTextBox.myTextBox.Text = String.Empty;
+
             this.saveListButton.Location = new Point(this.saveListButton.Location.X + 150, this.saveListButton.Location.Y);
             this.saveListButton.Hide();
             this.quitAddingListButton.Location = new Point(this.quitAddingListButton.Location.X + 150, this.quitAddingListButton.Location.Y);
             this.quitAddingListButton.Hide();
-            COUNTER_LISTS++;
-            textBox.Text = _selectedColumnName;
             this.btnAddList.Show();
+            _selectedColumnName = "";
         }
 
         private void quitSavingCardButton_Click(object sender, EventArgs e)
@@ -126,7 +119,7 @@ namespace TaskPlannerPIU
         private FlowLayoutPanel createFlp()
         {
             FlowLayoutPanel flp = new FlowLayoutPanel();
-            flp.BackColor = Color.FromArgb(100, 0, 102, 77);//0, 230, 184
+            flp.BackColor = Color.FromArgb(100, 0, 102, 77);
             flp.AllowDrop = true;
             flp.DragEnter += new DragEventHandler(flp_DragEnter);
             flp.MouseDown += new MouseEventHandler(EditButton.CardMessageTextBox_MouseDown);
@@ -147,15 +140,15 @@ namespace TaskPlannerPIU
             Button addCard = (Button)sender;
             FlowLayoutPanel flp = (FlowLayoutPanel)addCard.Parent;
 
-            editButton = new EditButton(flp);
-            editButton.Show();
+            _editButton = new EditButton(flp);
+            _editButton.Show();
 
-            saveCardButton = new Button();
-            saveCardButton.BackColor = Color.FromArgb(255, 52, 159, 153);
-            saveCardButton.Text = "Save Card";
-            saveCardButton.Click += new EventHandler(this.saveCard_Click);
-            flp.Controls.Add(saveCardButton);
-            map.Add(saveCardButton, editButton);
+            _saveCardButton = new Button();
+            _saveCardButton.BackColor = Color.FromArgb(255, 52, 159, 153);
+            _saveCardButton.Text = "Save Card";
+            _saveCardButton.Click += new EventHandler(this.saveCard_Click);
+            flp.Controls.Add(_saveCardButton);
+            _saveCardButtonEditButton.Add(_saveCardButton, _editButton);
         }
 
         private void flp_DragEnter(object sender, DragEventArgs e)
@@ -170,9 +163,18 @@ namespace TaskPlannerPIU
 
         private void saveCard_Click(object sender, EventArgs e)
         {
-            String msg = map[saveCardButton].Text.ToString();
-            editButton.cardMessageTextBox.ReadOnly = true;
-            saveCardButton.Hide();
+            string msg = _saveCardButtonEditButton[_saveCardButton].cardMessageTextBox.Text.ToString();
+            if (msg != String.Empty)
+            {
+                _editButton.cardMessageTextBox.ReadOnly = true;
+                _saveCardButton.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Please enter some text!");
+                return;
+            }
+
         }
 
         private void buttonBack_Click(object sender, EventArgs e)

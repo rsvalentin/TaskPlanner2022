@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TaskPlannerPIU.database;
+using TaskPlannerPIU.entities;
 
 namespace TaskPlannerPIU
 {
     public partial class MainWindow : Form
     {
         private string _username;
+        private string _password;
+        private DatabaseConnection _connection;
 
         public MainWindow()
         {
@@ -25,24 +22,40 @@ namespace TaskPlannerPIU
             this.textBoxPassword.Text = "";
         }
 
-        private void textBoxUsername_TextChanged(object sender, EventArgs e)
-        {
-            _username = textBoxUsername.Text;
-        }
-
         public string Username { get { return _username; } }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            TaskPlannerWindow taskPlannerWindow = new TaskPlannerWindow(this);
-            taskPlannerWindow.Show();
-            this.Hide();
-            DeleteTextBoxText();
-        }
+            _connection = new DatabaseConnection();
+            _connection.connect();
 
-        private void textBoxUsername_Load(object sender, EventArgs e)
-        {
+            _username = textBoxUsername.Text;
+            _password = textBoxPassword.Text;
 
+            var users = _connection.getAllUsers();
+            User foundUser = null;
+            foreach (var user in users)
+            {
+                if (!user.Username.Equals(_username))
+                    continue;
+                else
+                    foundUser = new User { Username = user.Username, Password = user.Password};
+            }
+            if (foundUser != null)
+            {
+
+                if (foundUser.Password.Equals(_password))
+                {
+                    TaskPlannerWindow taskPlannerWindow = new TaskPlannerWindow(this, _connection);
+                    taskPlannerWindow.Show();
+                    this.Hide();
+                    DeleteTextBoxText();
+                }
+                else
+                    MessageBox.Show("Wrong password!");
+            }
+            else
+                MessageBox.Show("User doesn't exist!");
         }
     }
 }

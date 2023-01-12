@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TaskPlannerPIU
@@ -16,6 +11,9 @@ namespace TaskPlannerPIU
         private int borderSize = 3;
         private Color borderFocusColor = Color.FromArgb(52, 159, 153);
         private bool isFocused = false;
+
+        public string Text { get; set; }
+
         public CustomTextBox()
         {
             InitializeComponent();
@@ -75,13 +73,13 @@ namespace TaskPlannerPIU
         [Category("TaskPlannerCustomized")]
         public string Texts
         {
-            get 
-            { 
-                return myTextBox.Text; 
+            get
+            {
+                return myTextBox.Text;
             }
             set
-            { 
-                myTextBox.Text = value; 
+            {
+                myTextBox.Text = value;
             }
         }
         [Category("TaskPlannerCustomized")]
@@ -97,8 +95,8 @@ namespace TaskPlannerPIU
             {
                 return myTextBox.UseSystemPasswordChar;
             }
-            set 
-            { 
+            set
+            {
                 myTextBox.UseSystemPasswordChar = value;
             }
         }
@@ -112,7 +110,7 @@ namespace TaskPlannerPIU
             {
                 penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
                 if (!isFocused)//normal border color 
-                { 
+                {
                     graph.DrawRectangle(penBorder, 0, 0, this.Width - 0.5F, this.Height - 0.5F);
                 }
                 else
@@ -120,7 +118,7 @@ namespace TaskPlannerPIU
                     penBorder.Color = borderFocusColor; //Set Border color in focus
                     graph.DrawRectangle(penBorder, 0, 0, this.Width - 0.5F, this.Height - 0.5F);
                 }
-            
+
             }
         }
 
@@ -137,7 +135,7 @@ namespace TaskPlannerPIU
 
         private void myTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            Text = myTextBox.Text;
         }
 
         //pt a schimba culorile bordurii
@@ -153,6 +151,5 @@ namespace TaskPlannerPIU
             this.Invalidate();
         }
 
-      
     }
 }

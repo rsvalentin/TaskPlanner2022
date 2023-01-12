@@ -55,6 +55,7 @@
     <Compile Include="CustomTextBox.Designer.cs">
       <DependentUpon>CustomTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="database\DbConnection.cs" />
     <Compile Include="EditButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -65,7 +66,7 @@
       <DependentUpon>EditCardWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Card\LastCardOfList.cs" />
-    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="entities\User.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

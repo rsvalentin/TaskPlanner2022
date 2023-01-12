@@ -38,12 +38,12 @@
             this.myTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.myTextBox.Location = new System.Drawing.Point(7, 7);
             this.myTextBox.Multiline = true;
-            this.myTextBox.Name = "myTextBox";
             this.myTextBox.PasswordChar = '*';
             this.myTextBox.Size = new System.Drawing.Size(266, 27);
             this.myTextBox.TabIndex = 0;
             this.myTextBox.Enter += new System.EventHandler(this.myTextBox_Enter);
             this.myTextBox.Leave += new System.EventHandler(this.myTextBox_Leave);
+            this.myTextBox.TextChanged += new System.EventHandler(this.myTextBox_TextChanged);
             // 
             // CustomTextBox
             // 
@@ -62,6 +62,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox myTextBox;
+        public System.Windows.Forms.TextBox myTextBox;
     }
 }
