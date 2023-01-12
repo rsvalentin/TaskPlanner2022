@@ -100,13 +100,13 @@ namespace TaskPlannerPIU
             CustomTextBox textBox = new CustomTextBox();
             textBox.Location = titleTextBox.Location;
             textBox.Width = 121;
-
+            titleTextBox.IsPassswordText = true;
+            textBox.IsPassswordText = true;
             var text = _selectedColumnName;
             textBox.Text = text;
             textBox.Height = 26;
             titleTextBox.Location = new Point(this.titleTextBox.Location.X + 150, this.titleTextBox.Location.Y);
             titleTextBox.Hide();
-            titleTextBox.Text = "";
             this.Controls.Add(textBox);
             textBox.Show();
             this.saveListButton.Location = new Point(this.saveListButton.Location.X + 150, this.saveListButton.Location.Y);
