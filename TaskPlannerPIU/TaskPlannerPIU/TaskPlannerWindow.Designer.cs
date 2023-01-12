@@ -51,9 +51,9 @@
             this.saveListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
             this.saveListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveListButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.saveListButton.Location = new System.Drawing.Point(55, 144);
+            this.saveListButton.Location = new System.Drawing.Point(106, 159);
             this.saveListButton.Name = "saveListButton";
-            this.saveListButton.Size = new System.Drawing.Size(58, 23);
+            this.saveListButton.Size = new System.Drawing.Size(60, 35);
             this.saveListButton.TabIndex = 3;
             this.saveListButton.Text = "Save";
             this.saveListButton.UseVisualStyleBackColor = false;
@@ -64,9 +64,9 @@
             this.quitAddingListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
             this.quitAddingListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quitAddingListButton.ForeColor = System.Drawing.Color.White;
-            this.quitAddingListButton.Location = new System.Drawing.Point(128, 144);
+            this.quitAddingListButton.Location = new System.Drawing.Point(172, 159);
             this.quitAddingListButton.Name = "quitAddingListButton";
-            this.quitAddingListButton.Size = new System.Drawing.Size(58, 23);
+            this.quitAddingListButton.Size = new System.Drawing.Size(65, 35);
             this.quitAddingListButton.TabIndex = 4;
             this.quitAddingListButton.Text = "Quit";
             this.quitAddingListButton.UseVisualStyleBackColor = false;
@@ -74,9 +74,9 @@
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(55, 116);
+            this.titleTextBox.Location = new System.Drawing.Point(97, 131);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(121, 22);
+            this.titleTextBox.Size = new System.Drawing.Size(152, 22);
             this.titleTextBox.TabIndex = 3;
             // 
             // btnAddList
@@ -85,9 +85,9 @@
             this.btnAddList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
             this.btnAddList.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddList.ForeColor = System.Drawing.Color.Black;
-            this.btnAddList.Location = new System.Drawing.Point(55, 82);
+            this.btnAddList.Location = new System.Drawing.Point(97, 74);
             this.btnAddList.Name = "btnAddList";
-            this.btnAddList.Size = new System.Drawing.Size(91, 28);
+            this.btnAddList.Size = new System.Drawing.Size(97, 32);
             this.btnAddList.TabIndex = 1;
             this.btnAddList.Text = "Add a list";
             this.btnAddList.UseMnemonic = false;

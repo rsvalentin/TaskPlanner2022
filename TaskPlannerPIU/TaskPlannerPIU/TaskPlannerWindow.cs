@@ -53,18 +53,29 @@ namespace TaskPlannerPIU
 
             _selectedColumnName = titleTextBox.Text;
             titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
-
+            titleTextBox.Width = 121;
             addCardButton = new Button();
             addCardButton.Text = "Add Card";
+            addCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
+
+         
             FlowLayoutPanel flp = createFlp();
             lastX = saveListButton.Location.X;
-            flp.Location = new Point(lastX, saveListButton.Location.Y + 20);
+            flp.Location = new Point(lastX - 12, saveListButton.Location.Y + 35);
             lastX = flp.Location.X;
 
-            flp.BackColor = Color.LightBlue;
             flp.Name = "flp";
+            //centrez butonul AddCard in flp
+            addCardButton.Width = 70;
+            addCardButton.Height = 35;
+            addCardButton.Left = (this.ClientSize.Width - this.addCardButton.Width) / 2;
+            addCardButton.Top = (this.ClientSize.Height - this.addCardButton.Height) / 2;
+            addCardButton.Anchor = AnchorStyles.None;
+
             this.Controls.Add(flp);
             flp.Controls.Add(addCardButton);
+            addCardButton.Anchor = AnchorStyles.None;
+
             addCardButton.Click += new EventHandler(this.addCard_click);
             counterFlp++;
             addCardButton.Name = "Add" + counterFlp;
@@ -83,6 +94,7 @@ namespace TaskPlannerPIU
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
             _selectedColumnName = titleTextBox.Text;
+            
         }
 
         private void TaskPlannerWindow_Scroll(object sender, ScrollEventArgs e)
@@ -94,6 +106,7 @@ namespace TaskPlannerPIU
         {
             TextBox textBox = new TextBox();
             textBox.Location = titleTextBox.Location;
+            textBox.Width = 120;
             var text = _selectedColumnName;
             textBox.Text = text;
             textBox.ReadOnly = true;
@@ -105,6 +118,7 @@ namespace TaskPlannerPIU
             this.Controls.Add(textBox);
             textBox.Show();
 
+            //saveListButton.BackColor = Color.FromArgb(255, 187, 10, 33);
             this.saveListButton.Location = new Point(this.saveListButton.Location.X + 150, this.saveListButton.Location.Y);
             this.saveListButton.Hide();
             this.quitAddingListButton.Location = new Point(this.quitAddingListButton.Location.X + 150, this.quitAddingListButton.Location.Y);
@@ -124,14 +138,14 @@ namespace TaskPlannerPIU
         private FlowLayoutPanel createFlp()
         {
             FlowLayoutPanel flp = new FlowLayoutPanel();
+            flp.BackColor = Color.FromArgb(100, 255, 255, 255);
             flp.AllowDrop = true;
             flp.DragEnter += flp_DragEnter;
             flp.DragDrop += flp_DragDrop;
             flp.WrapContents = false;
             flp.FlowDirection = FlowDirection.TopDown;
             flp.AutoScroll = true;
-            flp.Size = new Size(100, 200);
-            flp.BackColor = Color.LightBlue;
+            flp.Size = new Size(120, 250);
             flp.Name = "flp";
             return flp;
         }
@@ -148,6 +162,7 @@ namespace TaskPlannerPIU
             editButton.Show();
 
             saveCardButton = new Button();
+            saveCardButton.BackColor = Color.FromArgb(255, 52, 159, 153);//??????????????????????????
             saveCardButton.Text = "Save Card";
             saveCardButton.Click += new EventHandler(this.saveCard_Click);
             flp.Controls.Add(saveCardButton);
