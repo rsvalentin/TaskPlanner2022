@@ -141,6 +141,9 @@ namespace TaskPlannerPIU
             FlowLayoutPanel flp = new FlowLayoutPanel();
             flp.BackColor = Color.FromArgb(100, 255, 255, 255);
             flp.AllowDrop = true;
+            flp.DragEnter += new DragEventHandler(flp_DragEnter);
+            flp.MouseDown += new MouseEventHandler(EditButton.CardMessageTextBox_MouseDown);
+            flp.DragDrop += new DragEventHandler(flp_DragDrop);
             flp.DragEnter += flp_DragEnter;
             flp.DragDrop += flp_DragDrop;
             flp.WrapContents = false;
@@ -173,12 +176,12 @@ namespace TaskPlannerPIU
 
         private void flp_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            e.Effect = DragDropEffects.Copy;
         }
 
         private void flp_DragDrop(object sender, DragEventArgs e)
         {
-            ((Button)e.Data.GetData(typeof(Button))).Parent = (Panel)sender;
+            ((TextBox)e.Data.GetData(typeof(TextBox))).Parent = (FlowLayoutPanel)sender;
         }
 
         private void saveCard_Click(object sender, EventArgs e)

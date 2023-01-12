@@ -27,6 +27,7 @@ namespace TaskPlannerPIU
             cardMessageTextBox.Height = 50;
             btn = new Button();
             flp.Controls.Add(cardMessageTextBox);
+            cardMessageTextBox.MouseDown += CardMessageTextBox_MouseDown;
             cardMessageTextBox.Multiline = true;
 
             btn.Size = new Size(30, cardMessageTextBox.ClientSize.Height);
@@ -54,6 +55,15 @@ namespace TaskPlannerPIU
             EditCardWindow editCardWindow = new EditCardWindow(cardMessageTextBox);
             editCardWindow.Show();
 
+        }
+
+        public static void CardMessageTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox tb = (TextBox)sender;
+                tb.DoDragDrop(tb, DragDropEffects.Copy);
+            }
         }
     }
 }
