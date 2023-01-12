@@ -51,30 +51,30 @@ namespace TaskPlannerPIU
             this.quitAddingListButton.Show();
             this.titleTextBox.Show();
 
-            _selectedColumnName = titleTextBox.Text;
-            titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
-            titleTextBox.Width = 121;
-            addCardButton = new Button();
-            addCardButton.Text = "Add Card";
-            addCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
-
-         
             FlowLayoutPanel flp = createFlp();
             lastX = saveListButton.Location.X;
             flp.Location = new Point(lastX - 12, saveListButton.Location.Y + 35);
             lastX = flp.Location.X;
 
+            _selectedColumnName = titleTextBox.Text;
+            titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
+            titleTextBox.Width = 121;
+            titleTextBox.IsPassswordText = true;
+            addCardButton = new Button();
+            addCardButton.Text = "Add Card";
+            addCardButton.BackColor = Color.FromArgb(255, 187, 10, 33);
             flp.Name = "flp";
-            //centrez butonul AddCard in flp
             addCardButton.Width = 70;
             addCardButton.Height = 35;
-            addCardButton.Left = (this.ClientSize.Width - this.addCardButton.Width) / 2;
-            addCardButton.Top = (this.ClientSize.Height - this.addCardButton.Height) / 2;
-            addCardButton.Anchor = AnchorStyles.None;
 
             this.Controls.Add(flp);
+            //flp.Controls.Add(titleTextBox);
+            //flp.Controls.Add(this.quitAddingListButton);
+            //flp.Controls.Add(this.saveListButton);
             flp.Controls.Add(addCardButton);
-            addCardButton.Anchor = AnchorStyles.None;
+
+            ////////////////////
+                
 
             addCardButton.Click += new EventHandler(this.addCard_click);
             counterFlp++;
@@ -104,21 +104,20 @@ namespace TaskPlannerPIU
 
         private void saveListButton_Click(object sender, EventArgs e)
         {
-            TextBox textBox = new TextBox();
+            CustomTextBox textBox = new CustomTextBox();
             textBox.Location = titleTextBox.Location;
-            textBox.Width = 120;
+            textBox.Width = 121;
+
             var text = _selectedColumnName;
             textBox.Text = text;
-            textBox.ReadOnly = true;
-
+            textBox.Height = 26;
             titleTextBox.Location = new Point(this.titleTextBox.Location.X + 150, this.titleTextBox.Location.Y);
             titleTextBox.Hide();
             titleTextBox.Text = "";
 
+
             this.Controls.Add(textBox);
             textBox.Show();
-
-            //saveListButton.BackColor = Color.FromArgb(255, 187, 10, 33);
             this.saveListButton.Location = new Point(this.saveListButton.Location.X + 150, this.saveListButton.Location.Y);
             this.saveListButton.Hide();
             this.quitAddingListButton.Location = new Point(this.quitAddingListButton.Location.X + 150, this.quitAddingListButton.Location.Y);
@@ -126,6 +125,8 @@ namespace TaskPlannerPIU
 
             COUNTER_LISTS++;
             textBox.Text = _selectedColumnName;
+
+
             this.btnAddList.Show();
             
         }
@@ -147,6 +148,7 @@ namespace TaskPlannerPIU
             flp.AutoScroll = true;
             flp.Size = new Size(120, 250);
             flp.Name = "flp";
+            flp.Padding = new Padding(17, 17, 17, 17);
             return flp;
         }
 
@@ -156,9 +158,9 @@ namespace TaskPlannerPIU
             FlowLayoutPanel flp = (FlowLayoutPanel)addCard.Parent;
 
             editButton = new EditButton(flp);
-            editButton.cardMessageTextBox.Width = 80;
+           /* editButton.cardMessageTextBox.Width = 0;
             editButton.cardMessageTextBox.AutoSize = false;
-            editButton.cardMessageTextBox.Height = 40;
+            editButton.cardMessageTextBox.Height = 40;*/
             editButton.Show();
 
             saveCardButton = new Button();

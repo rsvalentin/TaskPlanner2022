@@ -28,27 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.myTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // myTextBox
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(7, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(236, 17);
-            this.textBox1.TabIndex = 0;
+            this.myTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.myTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.myTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.myTextBox.Location = new System.Drawing.Point(7, 7);
+            this.myTextBox.Multiline = true;
+            this.myTextBox.Name = "myTextBox";
+            this.myTextBox.PasswordChar = '*';
+            this.myTextBox.Size = new System.Drawing.Size(266, 27);
+            this.myTextBox.TabIndex = 0;
+            this.myTextBox.Enter += new System.EventHandler(this.myTextBox_Enter);
+            this.myTextBox.Leave += new System.EventHandler(this.myTextBox_Leave);
             // 
             // CustomTextBox
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.myTextBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "CustomTextBox";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(250, 30);
+            this.Size = new System.Drawing.Size(280, 41);
+            this.Load += new System.EventHandler(this.CustomTextBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -56,6 +62,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox myTextBox;
     }
 }

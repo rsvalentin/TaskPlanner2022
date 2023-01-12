@@ -32,22 +32,17 @@ namespace TaskPlannerPIU
 
         public string Username { get { return _username; } }
 
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonNext_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonNext_Click(object sender, EventArgs e)
         {
             TaskPlannerWindow taskPlannerWindow = new TaskPlannerWindow(this);
             taskPlannerWindow.Show();
             this.Hide();
             DeleteTextBoxText();
+        }
+
+        private void textBoxUsername_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

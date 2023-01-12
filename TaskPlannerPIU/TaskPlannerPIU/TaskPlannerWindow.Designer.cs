@@ -31,9 +31,9 @@
             this.labelWelcome = new System.Windows.Forms.Label();
             this.saveListButton = new System.Windows.Forms.Button();
             this.quitAddingListButton = new System.Windows.Forms.Button();
-            this.titleTextBox = new System.Windows.Forms.TextBox();
             this.btnAddList = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.titleTextBox = new TaskPlannerPIU.CustomTextBox();
             this.SuspendLayout();
             // 
             // labelWelcome
@@ -72,13 +72,6 @@
             this.quitAddingListButton.UseVisualStyleBackColor = false;
             this.quitAddingListButton.Click += new System.EventHandler(this.quitAddingListButton_Click);
             // 
-            // titleTextBox
-            // 
-            this.titleTextBox.Location = new System.Drawing.Point(97, 131);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(152, 22);
-            this.titleTextBox.TabIndex = 3;
-            // 
             // btnAddList
             // 
             this.btnAddList.AllowDrop = true;
@@ -97,6 +90,7 @@
             // buttonBack
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.buttonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBack.Location = new System.Drawing.Point(814, 478);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(132, 45);
@@ -105,16 +99,33 @@
             this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
+            // titleTextBox
+            // 
+            this.titleTextBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.titleTextBox.BorderColor = System.Drawing.Color.DarkGray;
+            this.titleTextBox.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(10)))), ((int)(((byte)(33)))));
+            this.titleTextBox.BorderSize = 3;
+            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTextBox.ForeColor = System.Drawing.Color.Black;
+            this.titleTextBox.IsPassswordText = false;
+            this.titleTextBox.Location = new System.Drawing.Point(97, 122);
+            this.titleTextBox.Multiline = true;
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Padding = new System.Windows.Forms.Padding(7);
+            this.titleTextBox.Size = new System.Drawing.Size(164, 31);
+            this.titleTextBox.TabIndex = 6;
+            this.titleTextBox.Texts = "";
+            // 
             // TaskPlannerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TaskPlannerPIU.Properties.Resources.piu_copy;
             this.ClientSize = new System.Drawing.Size(982, 553);
+            this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.btnAddList);
-            this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.quitAddingListButton);
             this.Controls.Add(this.saveListButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -135,8 +146,8 @@
         private System.Windows.Forms.Label labelWelcome;
         private System.Windows.Forms.Button saveListButton;
         private System.Windows.Forms.Button quitAddingListButton;
-        private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Button btnAddList;
         private System.Windows.Forms.Button buttonBack;
+        private CustomTextBox titleTextBox;
     }
 }

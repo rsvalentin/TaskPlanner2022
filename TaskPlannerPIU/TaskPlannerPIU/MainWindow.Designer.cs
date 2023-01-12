@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBoxUsername = new TaskPlannerPIU.CustomTextBox();
+            this.textBoxPassword = new TaskPlannerPIU.CustomTextBox();
             this.buttonNext = new TaskPlannerPIU.CustomButton();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(292, 60);
+            this.label1.Location = new System.Drawing.Point(263, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(382, 69);
             this.label1.TabIndex = 0;
@@ -55,41 +55,55 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(307, 178);
+            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(266, 278);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 16);
+            this.label3.Size = new System.Drawing.Size(85, 19);
             this.label3.TabIndex = 2;
             this.label3.Text = "Username";
-            // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.Location = new System.Drawing.Point(405, 172);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(161, 22);
-            this.textBoxUsername.TabIndex = 3;
-            this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(405, 222);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(161, 22);
-            this.textBoxPassword.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(307, 228);
+            this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(266, 334);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 16);
+            this.label4.Size = new System.Drawing.Size(81, 19);
             this.label4.TabIndex = 6;
             this.label4.Text = "Password";
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.BorderColor = System.Drawing.Color.Gray;
+            this.textBoxUsername.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(159)))), ((int)(((byte)(153)))));
+            this.textBoxUsername.BorderSize = 3;
+            this.textBoxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxUsername.ForeColor = System.Drawing.Color.Black;
+            this.textBoxUsername.IsPassswordText = true;
+            this.textBoxUsername.Location = new System.Drawing.Point(368, 268);
+            this.textBoxUsername.Multiline = true;
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Padding = new System.Windows.Forms.Padding(7);
+            this.textBoxUsername.Size = new System.Drawing.Size(211, 34);
+            this.textBoxUsername.TabIndex = 11;
+            this.textBoxUsername.Texts = "";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.BorderColor = System.Drawing.Color.Gray;
+            this.textBoxPassword.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(159)))), ((int)(((byte)(153)))));
+            this.textBoxPassword.BorderSize = 3;
+            this.textBoxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPassword.ForeColor = System.Drawing.Color.Black;
+            this.textBoxPassword.IsPassswordText = false;
+            this.textBoxPassword.Location = new System.Drawing.Point(368, 327);
+            this.textBoxPassword.Multiline = true;
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Padding = new System.Windows.Forms.Padding(7);
+            this.textBoxPassword.Size = new System.Drawing.Size(211, 34);
+            this.textBoxPassword.TabIndex = 10;
+            this.textBoxPassword.Texts = "";
             // 
             // buttonNext
             // 
@@ -98,7 +112,7 @@
             this.buttonNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNext.ForeColor = System.Drawing.Color.White;
-            this.buttonNext.Location = new System.Drawing.Point(368, 290);
+            this.buttonNext.Location = new System.Drawing.Point(386, 395);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(150, 40);
             this.buttonNext.TabIndex = 7;
@@ -113,9 +127,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(898, 618);
+            this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.buttonNext);
-            this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -125,7 +139,6 @@
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Welcome Page";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,10 +148,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label4;
         private CustomButton buttonNext;
+        private CustomTextBox textBoxPassword;
+        private CustomTextBox textBoxUsername;
     }
 }
 

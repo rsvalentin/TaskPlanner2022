@@ -21,8 +21,11 @@ namespace TaskPlannerPIU
         {
             this.flp = flp;
             cardMessageTextBox = new TextBox();
+            //cardMessageTextBox.Size = new Size(200, 100);
+            cardMessageTextBox.Width = flp.Width-35;
+            cardMessageTextBox.AutoSize = false;
+            cardMessageTextBox.Height = 50;
             btn = new Button();
-            // this.cardMessageTextBox.Parent = this;
             flp.Controls.Add(cardMessageTextBox);
             cardMessageTextBox.Multiline = true;
 
@@ -36,7 +39,6 @@ namespace TaskPlannerPIU
             btn.BackColor = Color.White;
             btn.FlatAppearance.BorderSize = 1;
             btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn.Click += new EventHandler(this.EditButton_Click);
 
@@ -49,7 +51,6 @@ namespace TaskPlannerPIU
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            //pt un parent, ar trbui sa am mai multe EditButton uri!!!
             EditCardWindow editCardWindow = new EditCardWindow(cardMessageTextBox);
             editCardWindow.Show();
 
